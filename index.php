@@ -12,7 +12,7 @@
             <article class="hero-card fade-in-up">
                 <h1>REVIVE THE GOLDEN AGE OF GAMING</h1>
                 <p>Rediscover the thrill of classic arcade gaming. Our handcrafted cabinets combine vintage design with modern durability. Step into nostalgia and play like it's 1985.</p>
-                <a href="./products.php" class="main-btn">OUR SHOP</a>
+                <a href="./shop.php" class="main-btn">OUR SHOP</a>
             </article>
         </section>
 
@@ -45,16 +45,18 @@
                     <blockquote>
                         "Reliving the classics has become my stress release. It's like I have my own personal slice of the '80s here at home."
                     </blockquote>
-                    <p class="name">Angela Brooks</p>
-                    <p class="location">Denver, CO</p>
+                        <p class="name-location">
+                            <span class="name">Angela Brooks</span>, <span class="location">Barrie, ON</span>
+                        </p>
                 </article>
 
                 <article class="testimonial">
                     <blockquote>
                         "Every time I fire up my cabinet, it's pure nostalgia. ArcadiaWorks nailed it!"
                     </blockquote>
-                    <p class="name">Mark Reynolds</p>
-                    <p class="location">Portland, OR</p>
+                        <p class="name-location">
+                            <span class="name">Brent Warwick</span>, <span class="location">Toronto, ON</span>
+                        </p>
                 </article>
 
 
@@ -62,8 +64,9 @@
                     <blockquote>
                         "From the joystick feel to the CRT glow, it's like the arcade never left. ArcadiaWorks brought it all back."
                     </blockquote>
-                    <p class="name">Mark Reynolds</p>
-                    <p class="location">Toronto, ON</p>
+                        <p class="name-location">
+                            <span class="name">Brian Baker</span>, <span class="location">Midland, ON</span>
+                        </p>
                 </article>
 
 
@@ -71,11 +74,13 @@
                     <blockquote>
                         "It's like stepping into my childhood arcade-every sound, every pixel, perfectly preserved."
                     </blockquote>
-                    <p class="name">Brian Baker</p>
-                    <p class="location">Barrie, ON</p>
+                        <p class="name-location">
+                            <span class="name">Steve White</span>, <span class="location">Orillia, ON</span>
+                        </p>
                 </article>
 
             </div>
+            <a href="./shop.php" class="main-btn">SHOP NOW</a>
         </section>
 
     </main>

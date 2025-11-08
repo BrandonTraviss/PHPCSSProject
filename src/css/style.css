@@ -38,7 +38,18 @@
     box-sizing: border-box;
 }
 
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Input add padding back */
+input {
+    padding: .25rem;
+}
+
 /* Basic Font Size / Color*/
+
 p,
 a,
 h1,
@@ -54,7 +65,9 @@ label {
 
 p,
 li,
-a {
+a,
+label,
+input {
     font-size: 1.1rem;
 }
 
@@ -236,49 +249,6 @@ footer {
     width: 100%;
 }
 
-/* Multi Use Classes */
-.main-btn {
-    cursor: pointer;
-    font-family: sans-serif;
-    background-color: var(--logo-colour);
-    color: var(--main-bg);
-    border-radius: 5px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    padding: 1rem;
-    text-decoration: none;
-    max-width: fit-content;
-    max-height: fit-content;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-.main-btn:hover {
-    background-color: var(--hover-btn-colour);
-    transform: scale(1.1);
-}
-
-.dark-btn {
-    cursor: pointer;
-    font-family: sans-serif;
-    background-color: var(--main-bg);
-    border: 1px solid var(--logo-colour);
-    color: var(--logo-colour);
-    border-radius: 5px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    padding: 1rem;
-    text-decoration: none;
-    max-width: fit-content;
-    max-height: fit-content;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-.dark-btn:hover {
-    background-color: var(--hover-btn-colour);
-    color: var(--main-bg);
-    transform: scale(1.1);
-}
-
 /* INDEX */
 /* INDEX-HERO */
 .index-hero {
@@ -286,7 +256,7 @@ footer {
     justify-content: center;
     align-items: center;
     padding-inline: 1rem;
-    background: linear-gradient(to bottom,var(--header-bg), var(--main-bg), var(--second-bg));
+    background: linear-gradient(to bottom, var(--header-bg), var(--main-bg), var(--second-bg));
     min-height: 70vh;
 }
 
@@ -361,11 +331,17 @@ footer {
 
 /* INDEX - TESTIMONIAL */
 .testimonials {
-    background: linear-gradient(to bottom,var(--second-bg), var(--main-bg), var(--header-bg));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, var(--second-bg), var(--main-bg), var(--header-bg));
     color: white;
     text-align: center;
     padding: 4rem 2rem;
     min-height: 60vh;
+    gap: 2rem;
+    flex-grow: 1;
 }
 
 .testimonials h2 {
@@ -380,13 +356,20 @@ footer {
     justify-content: center;
     gap: 2rem;
     flex-wrap: wrap;
+    align-items: stretch;
 }
 
 .testimonial {
-    max-width: 300px;
-    padding: 1rem;
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: var(--second-bg);
     border-radius: 8px;
+    padding: 1rem;
+}
+.testimonial p {
+    flex-grow: 1;
 }
 
 blockquote {
@@ -395,12 +378,78 @@ blockquote {
     margin-bottom: 1rem;
 }
 
-.name,
-.location {
-    font-size: 0.85rem;
-    color: #ccc;
+.name-location {
+  font-size: 0.85rem;
+  color: #ccc;
+  margin: 0;
 }
 
+.name,
+.location {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+/* LOGIN / REGISTER */
+.login-body>main,
+.register-body>main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--second-bg);
+    background: linear-gradient(to bottom, var(--header-bg), var(--main-bg), var(--header-bg));
+    min-height: 80vh;
+    padding: 1rem;
+}
+
+.login-form,
+.register-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: fit-content;
+    background-color: var(--card-bg);
+    padding: 4rem;
+    border-radius: 10px;
+    gap: 1rem;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    max-width: 100%;
+}
+
+/* FORM */
+.form-btn-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.form-btn {
+    cursor: pointer;
+    font-family: sans-serif;
+    background-color: var(--logo-colour);
+    color: var(--main-bg);
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.5rem;
+    padding-inline: 2rem;
+    text-decoration: none;
+    max-width: fit-content;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.form-btn:hover {
+    background-color: var(--hover-btn-colour);
+    transform: scale(1.05);
+}
 
 /* Modular Classes */
 
@@ -432,6 +481,49 @@ blockquote {
 
 .small-text {
     font-size: .8rem;
+}
+
+/* Multi Use Classes */
+.main-btn {
+    cursor: pointer;
+    font-family: sans-serif;
+    background-color: var(--logo-colour);
+    color: var(--main-bg);
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 1rem;
+    text-decoration: none;
+    max-width: fit-content;
+    max-height: fit-content;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.main-btn:hover {
+    background-color: var(--hover-btn-colour);
+    transform: scale(1.1);
+}
+
+.dark-btn {
+    cursor: pointer;
+    font-family: sans-serif;
+    background-color: var(--main-bg);
+    border: 1px solid var(--logo-colour);
+    color: var(--logo-colour);
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 1rem;
+    text-decoration: none;
+    max-width: fit-content;
+    max-height: fit-content;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.dark-btn:hover {
+    background-color: var(--hover-btn-colour);
+    color: var(--main-bg);
+    transform: scale(1.1);
 }
 
 /* Animations */

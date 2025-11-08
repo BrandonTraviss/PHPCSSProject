@@ -4,9 +4,23 @@
     include_once "./inc/templates/meta.php";
     include_once "./inc/templates/header.php";
 ?>
-<body>
+<body class="login-body">
     <main>
-        
+        <form action="" class="login-form">
+            <div class="input-container">
+                <label for=":username" class="label-row-login">Username</label>
+                <input name=":username" type="text" placeholder="Username">
+            </div>
+            <div class="input-container">
+                <label for=":password" class="label-row-login">Password</label>
+                <input name=":password" type="password" placeholder="Password">                
+            </div>
+
+            <div class="form-btn-container">
+                <button class="form-btn">Login</button>
+            </div>
+            <p>Need an account? <a class="logo-colour no-dec" href="./register.php">Register</a></p>
+        </form>
     </main>
 </body>
 <?php include_once "./inc/templates/footer.php" ?>
