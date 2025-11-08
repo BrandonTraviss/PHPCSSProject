@@ -1,0 +1,350 @@
+/* FONT IMPORTS */
+/* Navbar Font */
+@import url('https://fonts.googleapis.com/css2?family=Prosto+One&display=swap');
+/* Body Font */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
+/* Index Hero */
+@import url('https://fonts.googleapis.com/css2?family=Jersey+20&display=swap');
+
+/* VARIABLES */
+:root {
+    --font-navbar: "Prosto One", sans-serif;
+    --font-header: "Prosto One", sans-serif;
+    --font-body: "Newsreader", serif;
+    --font-index-hero: "Jersey 20", sans-serif;
+
+    --logo-colour: #DBA323;
+    --logo-colour-2: #ffd269;
+    --hover-btn-colour: #ffbe27;
+    --offwhite-colour: #F5F5F5;
+    --card-bg: #0f0f0f;
+
+    --main-bg: #0f0f11;
+    --second-bg: #15151d;
+
+    --header-bg: #070503;
+    --header-text: var(--offwhite-colour);
+    --header-hover: var(--logo-colour);
+
+    --footer-hover: var(--logo-colour);
+    --footer-bg: #070503;
+    --footer-text: var(--offwhite-colour);
+}
+
+/* Basic CSS Reset */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Basic Font Size / Color*/
+p,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+label {
+    color: var(--offwhite-colour);
+}
+
+p,
+li,
+a {
+    font-size: 1.1rem;
+}
+
+/* Basic Font Family Set */
+body {
+    background-color: var(--header-bg);
+    font-family: var(--font-body);
+}
+
+nav {
+    font-family: var(--font-navbar);
+}
+
+/* Header */
+header {
+    position: sticky;
+    top: 0px;
+    background-color: var(--header-bg);
+    z-index: 100;
+}
+
+.nav-logo {
+    width: 10vw;
+    min-width: 7rem;
+    max-width: 15rem;
+}
+
+nav {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mobile menu */
+.mobile-menu {
+    top: 122.75px;
+    position: absolute;
+    flex-direction: column;
+    list-style: none;
+    gap: 2rem;
+    padding: 2rem;
+    background-color: var(--header-bg);
+    width: 100%;
+    align-items: center;
+}
+
+.mobile-menu>li>a {
+    text-decoration: none;
+    color: var(--offwhite-colour);
+}
+
+.menu-icon-container {
+    height: 3rem;
+    width: auto;
+}
+
+.menu-icon-container>img {
+    height: 100%;
+    width: auto;
+}
+
+.menu-icon-container {
+    display: none;
+}
+
+.mobile-menu.active {
+    animation: slideDown 0.1s ease-out forwards;
+}
+
+.hidden {
+    display: none;
+}
+
+.active {
+    display: none;
+}
+
+/* Desktop menu */
+.desktop-menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2rem;
+    width: 100%;
+    padding: 2rem;
+    list-style: none;
+}
+
+.desktop-menu>li>a {
+    text-decoration: none;
+    color: var(--header-text);
+    font-size: 1.3rem;
+}
+
+.desktop-menu>li>a:hover {
+    color: var(--header-hover);
+}
+
+.logo-nav {
+    margin-right: auto;
+}
+
+/* FOOTER */
+footer {
+    padding-block: 2rem;
+    display: grid;
+    grid-template-areas:
+        "footer1 footer2 footer3"
+        "copyright copyright copyright";
+    color: var(--footer-text);
+    background-color: var(--footer-bg);
+}
+
+.footer1 {
+    grid-area: footer1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer1>ul {
+    list-style-type: none;
+}
+
+.footer1>ul>li>a {
+    text-decoration: none;
+    color: #F5F5F5;
+}
+
+.footer1>ul>li>a:hover {
+    color: var(--header-hover);
+}
+
+.footer2 {
+    grid-area: footer2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer3 {
+    grid-area: footer3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.copy-container {
+    display: flex;
+    justify-content: center;
+    grid-area: copyright;
+}
+
+.footer-logo-container {
+    width: 10vw;
+    min-width: 10rem;
+    max-width: 15rem;
+}
+
+.footer-logo-container>img {
+    width: 100%;
+}
+
+.socials-container {
+    display: flex;
+    gap: 2rem;
+    margin-block: 1rem;
+}
+
+.footer-svg-container {
+    width: 3rem;
+}
+
+.footer-svg-container>img {
+    width: 100%;
+}
+
+/* Multi Use Classes */
+.main-btn {
+    cursor: pointer;
+    font-family: sans-serif;
+    background-color: var(--logo-colour);
+    color: var(--main-bg);
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 1rem;
+    text-decoration: none;
+    max-width: fit-content;
+    max-height: fit-content;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.main-btn:hover {
+    background-color: var(--hover-btn-colour);
+    transform: scale(1.1);
+}
+
+.dark-btn {
+    cursor: pointer;
+    font-family: sans-serif;
+    background-color: var(--main-bg);
+    border: 1px solid var(--logo-colour);
+    color: var(--logo-colour);
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 1rem;
+    text-decoration: none;
+    max-width: fit-content;
+    max-height: fit-content;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.dark-btn:hover {
+    background-color: var(--hover-btn-colour);
+    color: var(--main-bg);
+    transform: scale(1.1);
+}
+
+/* Modular Classes */
+
+/* Colours */
+.logo-colour {
+    color: var(--logo-colour);
+}
+
+.logo-colour-2 {
+    color: var(--logo-colour-2);
+}
+
+/* Font Styles */
+.no-dec {
+    text-decoration: none;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.bolder {
+    font-weight: 900;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.small-text {
+    font-size: .8rem;
+}
+
+/* Media Queries */
+@media (max-width: 900px) {
+    .desktop-menu {
+        display: none;
+    }
+
+    .active {
+        display: flex;
+    }
+
+    .menu-icon-container {
+        display: inline;
+    }
+}
+
+@media (max-width: 768px) {
+    footer {
+        padding-block: 2rem;
+        display: grid;
+        grid-template-areas:
+            "footer1 footer2"
+            "footer3 footer3"
+            "copyright copyright ";
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 425px) {
+    footer {
+        padding-block: 2rem;
+        grid-template-areas:
+            "footer1"
+            "footer2"
+            "footer3"
+            "copyright";
+    }
+}
