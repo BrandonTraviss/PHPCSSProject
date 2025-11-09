@@ -459,13 +459,25 @@ blockquote {
 .featured-product {
     display: grid;
     padding: 2rem;
-    padding-block: 4rem;
+    padding-block: 2rem;
     grid-template-columns: 1f 1fr;
     grid-template-areas:
         "featured-left featured-right";
     background: linear-gradient(to bottom, var(--header-bg), var(--main-bg), var(--second-bg));
 }
-
+.featured-title{
+    text-align: center;
+    color: var(--logo-colour);
+}
+.featured-product-title{
+    font-size: 2rem;
+    color: var(--logo-colour);
+}
+.featured-cart-price{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
 .featured-left {
     grid-area: featured-left;
     display: flex;
@@ -509,7 +521,16 @@ blockquote {
     justify-content: center;
     background: linear-gradient(to bottom, var(--second-bg), var(--main-bg), var(--header-bg));
 }
-
+.products-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+.products-header{
+    color: var(--logo-colour);
+    font-size: 2rem;
+}
 .product-card {
     display: flex;
     flex-direction: column;
