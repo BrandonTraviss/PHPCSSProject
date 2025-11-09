@@ -8,12 +8,12 @@
     <main>
         <form action="" class="login-form">
             <div class="input-container">
-                <label for=":username" class="label-row-login">Username</label>
-                <input name=":username" type="text" placeholder="Username">
+                <label for="username" class="label-row-login">Username</label>
+                <input id="username" name="username" type="text" placeholder="Username">
             </div>
             <div class="input-container">
-                <label for=":password" class="label-row-login">Password</label>
-                <input name=":password" type="password" placeholder="Password">                
+                <label for="password" class="label-row-login">Password</label>
+                <input id="password" name="password" type="password" placeholder="Password">                
             </div>
 
             <div class="form-btn-container">
