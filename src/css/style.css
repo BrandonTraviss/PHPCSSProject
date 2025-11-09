@@ -445,6 +445,7 @@ blockquote {
     padding-inline: 2rem;
     text-decoration: none;
     max-width: fit-content;
+    border: none;
     transition: transform 0.3s ease, background-color 0.3s ease;
     margin-bottom: 1rem;
 }
@@ -467,6 +468,7 @@ blockquote {
 }
 .featured-title{
     text-align: center;
+    font-size: 1.75rem;
     color: var(--logo-colour);
 }
 .featured-product-title{
@@ -529,7 +531,7 @@ blockquote {
 }
 .products-header{
     color: var(--logo-colour);
-    font-size: 2rem;
+    font-size: 1.75rem;
 }
 .product-card {
     display: flex;
@@ -584,6 +586,11 @@ blockquote {
     max-width: 30rem
 }
 /* Modular Classes */
+
+/* Spacing */
+.mb-2{
+    margin-bottom: 2rem;
+}
 
 /* Colours */
 .logo-colour {

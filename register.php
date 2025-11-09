@@ -7,6 +7,7 @@
 <body class="register-body">
     <main>
         <form action="" class="register-form">
+            <h2 class="mb-2">Register</h2>
             <div class="input-container">
                 <label for="username" class="label-row-register">Username</label>
                 <input id="username" name="username" type="text" placeholder="Username">

@@ -6,11 +6,11 @@
 ?>
 <body>
     <main class="contact-main">
-        <h1 class="logo-colour">Contact Us</h1>
-        <p class="contact-intro">
-        Whether you're a retro gaming enthusiast, a collector, or just curious about our handcrafted cabinets, we'd love to hear from you. Fill out the form below and we'll get back to you within 1–2 business days.
-        </p>
         <form class="contact-form" action="">
+            <h1 class="logo-colour">Contact Us</h1>
+            <p class="contact-intro">
+            Whether you're a retro gaming enthusiast, a collector, or just curious about our handcrafted cabinets, we'd love to hear from you. Fill out the form below and we'll get back to you within 1–2 business days.
+            </p>
             <div class="input-container">
                 <label for="firstName" class="label-row-login">First Name</label>
                 <input id="firstName" name="firstName" type="text" placeholder="First Name">

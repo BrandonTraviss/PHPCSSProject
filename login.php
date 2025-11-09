@@ -7,6 +7,7 @@
 <body class="login-body">
     <main>
         <form action="" class="login-form">
+            <h2 class="mb-2">Login</h2>
             <div class="input-container">
                 <label for="username" class="label-row-login">Username</label>
                 <input id="username" name="username" type="text" placeholder="Username">
