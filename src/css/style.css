@@ -628,6 +628,7 @@ blockquote {
     text-decoration: none;
     max-width: fit-content;
     max-height: fit-content;
+    border: none;
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
@@ -646,6 +647,7 @@ blockquote {
     padding: 1rem;
     text-decoration: none;
     max-height: fit-content;
+    border: none;
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
