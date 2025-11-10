@@ -6,10 +6,12 @@ include_once "./inc/templates/header.php";
 ?>
 
 <body>
-    <main>
+    <main class="about-main">
+        <div class="about-main-title-container">
+            <h1 class="logo-colour about-title">About ArcadiaWorks</h1>
+            <p class="about-text">At ArcadiaWorks, we breathe new life into technology, refurbishing quality electrincs to reduce waste and make premium hardware accessible for everyone</p>
+        </div>
         <section class="accordion">
-            <h2>About ArcadiaWorks</h2>
-
             <details>
                 <summary>Who We Are</summary>
                 <p>ArcadiaWorks is a passionate team of arcade enthusiasts dedicated to reviving the golden age of gaming. We specialize in buying, selling, and refurbishing arcade cabinets that capture the spirit of classic arcades while meeting modern standards of quality and performance.</p>
@@ -41,6 +43,43 @@ include_once "./inc/templates/header.php";
                 <p>Have a cabinet to sell? Looking for something specific? Want a custom build? Reach out through our <a href="contact.php" class="logo-colour no-dec">Contact</a> page.We're always ready to talk arcade and help you find the perfect machine.
                 </p>
             </details>
+        </section>
+        <section>
+            <h2 class="logo-colour text-centre mb-2">Meet Our Team</h2>
+            <div class="profiles-container">
+                <article class="about-profile">
+                    <div class="about-profile-pic-container">
+                        <img src="./src/img/alexCarter.png" alt="Alex Carter">
+                    </div>
+                    <h3 class="logo-colour-2">Alex Carter</h3>
+                    <p>Founder & CEO</p>
+                </article>
+                <article class="about-profile">
+                    <div class="about-profile-pic-container">
+                        <img src="./src/img/jordanLee.png" alt="Jordan Lee">
+                    </div>
+                    <h3 class="logo-colour-2">Jordan Lee</h3>
+                    <p>Head of Operations</p>
+                </article>
+                <article class="about-profile">
+                    <div class="about-profile-pic-container">
+                        <img src="./src/img/suzukiHiroshi.png" alt="Suzuki Hiroshi">
+                    </div>
+                    <h3 class="logo-colour-2">Suzuki Hiroshi</h3>
+                    <p>Refubishment Lead</p>
+                </article>
+            </div>
+        </section>
+        <section class="about-mission">
+            <div class="mission-left">
+                <div class="mission-svg">
+                    <img src="./src/img/recycle.svg" alt="">
+                </div>
+                <p>Over 30,000 cabinets refurbished and saved from landfills since 2020</p>
+            </div>
+                <div class="arcadia-about-img-container">
+                    <img src="./src/img/arcadiaAbout.png" alt="">
+                </div>
         </section>
     </main>
 </body>

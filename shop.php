@@ -6,10 +6,10 @@
 ?>
 <body>
     <main>
-        <section>
-            <h1 class="featured-title">F<span class="logo-colour-2">eatured</span>  A<span class="logo-colour-2">rcade</span>  M<span class="logo-colour-2">achine</span></h1>
+        <section class="featured-section fade-in">
             <!-- Randomly Selected from products -->
             <article class="featured-product">
+                <h1 class="featured-title">F<span class="logo-colour-2">eatured</span>  A<span class="logo-colour-2">rcade</span>  M<span class="logo-colour-2">achine</span></h1>
                 <div class="featured-left">
                     <!-- Grab from Database -->
                     <h1 class="featured-product-title">Pacman</h1>
