@@ -25,7 +25,7 @@ include_once "./inc/templates/header.php";
             <details>
                 <summary>Our Products</summary>
                 <p>Our inventory includes vintage originals, refurbished classics, and custom-built arcade cabinets. Each unit is tested for durability and gameplay quality, with optional enhancements like LED lighting, multi-game systems, and personalized artwork.
-                    <a href="" class="logo-colour no-dec">Check out our shop</a>
+                    <a href="./shop.php" class="logo-colour no-dec">Check out our shop</a>
                 </p>
             </details>
             <details>
@@ -40,7 +40,7 @@ include_once "./inc/templates/header.php";
             </details>
             <details>
                 <summary>Get in Touch</summary>
-                <p>Have a cabinet to sell? Looking for something specific? Want a custom build? Reach out through our <a href="contact.php" class="logo-colour no-dec">Contact</a> page.We're always ready to talk arcade and help you find the perfect machine.
+                <p>Have a cabinet to sell? Looking for something specific? Want a custom build? Reach out through our <a href="./contact.php" class="logo-colour no-dec">Contact</a> page.We're always ready to talk arcade and help you find the perfect machine.
                 </p>
             </details>
         </section>
