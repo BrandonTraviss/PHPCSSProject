@@ -610,6 +610,8 @@ blockquote {
 /* About */
 .about-main {
     padding: 1rem;
+        background: linear-gradient(to bottom, var(--header-bg), var(--main-bg),var(--second-bg), var(--header-bg));
+    
 }
 .about-main-title-container{
     display: flex;

@@ -29,7 +29,7 @@ include_once "./inc/templates/header.php";
                 </p>
             </details>
             <details>
-                <summary>Refubishment Process</summary>
+                <summary>Refurbishment Process</summary>
                 <p>Every cabinet we refurbish goes through a meticulous process: cleaning, repairing, repainting, and upgrading components. We preserve the original feel while enhancing reliability, ensuring each machine is ready for years of play.
                 </p>
             </details>
@@ -66,20 +66,29 @@ include_once "./inc/templates/header.php";
                         <img src="./src/img/suzukiHiroshi.png" alt="Suzuki Hiroshi">
                     </div>
                     <h3 class="logo-colour-2">Suzuki Hiroshi</h3>
-                    <p>Refubishment Lead</p>
+                    <p>Refurbishment Lead</p>
                 </article>
             </div>
         </section>
         <section class="about-mission">
-            <div class="mission-left">
+            <article class="mission-left">
                 <div class="mission-svg">
                     <img src="./src/img/recycle.svg" alt="">
                 </div>
                 <p>Over 30,000 cabinets refurbished and saved from landfills since 2020</p>
-            </div>
-                <div class="arcadia-about-img-container">
-                    <img src="./src/img/arcadiaAbout.png" alt="">
+            </article>
+            <article class="mission-left">
+                <div class="mission-svg">
+                    <img src="./src/img/group.svg" alt="">
                 </div>
+                <p>Over 200,000 customers proudly served</p>
+            </article>
+            <article class="mission-left">
+                <div class="mission-svg">
+                    <img src="./src/img/donation.svg" alt="">
+                </div>
+                <p>Over $300,000 donated to sustainable projects</p>
+            </article>
         </section>
     </main>
 </body>
