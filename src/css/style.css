@@ -466,20 +466,24 @@ blockquote {
         "featured-left featured-right";
     background: linear-gradient(to bottom, var(--header-bg), var(--main-bg), var(--second-bg));
 }
-.featured-title{
+
+.featured-title {
     text-align: center;
     font-size: 1.75rem;
     color: var(--logo-colour);
 }
-.featured-product-title{
+
+.featured-product-title {
     font-size: 2rem;
     color: var(--logo-colour);
 }
-.featured-cart-price{
+
+.featured-cart-price {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
+
 .featured-left {
     grid-area: featured-left;
     display: flex;
@@ -523,16 +527,19 @@ blockquote {
     justify-content: center;
     background: linear-gradient(to bottom, var(--second-bg), var(--main-bg), var(--header-bg));
 }
+
 .products-container {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
     justify-content: center;
 }
-.products-header{
+
+.products-header {
     color: var(--logo-colour);
     font-size: 1.75rem;
 }
+
 .product-card {
     display: flex;
     flex-direction: column;
@@ -560,7 +567,7 @@ blockquote {
 }
 
 /* CONTACT */
-.contact-main{
+.contact-main {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -570,25 +577,73 @@ blockquote {
     background: linear-gradient(to bottom, var(--header-bg), var(--main-bg), var(--header-bg));
     min-height: 70vh;
 }
-.contact-form{
+
+.contact-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     width: 90vw;
     max-width: 30rem;
 }
-.contact-form>textarea{
+
+.contact-form>textarea {
     height: 10rem;
     width: 100%;
     resize: none;
 }
-.contact-intro{
+
+.contact-intro {
     max-width: 30rem
 }
+
+/* Accoridon */
+.accordion {
+    max-width: 700px;
+    margin: 2rem auto;
+    font-family: 'Segoe UI', sans-serif;
+    color: #fff;
+    background-color: var(--card-bg);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.accordion h2 {
+    text-align: center;
+    color: var(--logo-colour);
+    margin-bottom: 1.5rem;
+}
+
+details {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: var(--card-bg);
+    padding: 0.5rem 1rem;
+}
+
+summary {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--logo-colour);
+    cursor: pointer;
+    outline: none;
+}
+
+details[open] summary {
+    color: var(--logo-colour-2);
+}
+
+details p {
+    margin-top: 0.5rem;
+    color: var(--offwhite-colour);
+}
+
 /* Modular Classes */
 
 /* Spacing */
-.mb-2{
+.mb-2 {
     margin-bottom: 2rem;
 }
 
@@ -625,6 +680,7 @@ blockquote {
 /* Multi Use Classes */
 .main-btn {
     cursor: pointer;
+    display: block;
     font-family: sans-serif;
     background-color: var(--logo-colour);
     color: var(--main-bg);
@@ -643,8 +699,10 @@ blockquote {
     background-color: var(--hover-btn-colour);
     transform: scale(1.1);
 }
+
 .stretch-btn {
     cursor: pointer;
+    display: block;
     font-family: sans-serif;
     background-color: var(--logo-colour);
     color: var(--main-bg);
@@ -662,8 +720,10 @@ blockquote {
     background-color: var(--hover-btn-colour);
     transform: scale(1.025);
 }
+
 .dark-btn {
     cursor: pointer;
+    display: block;
     font-family: sans-serif;
     background-color: var(--main-bg);
     border: 1px solid var(--logo-colour);
@@ -683,6 +743,7 @@ blockquote {
     color: var(--main-bg);
     transform: scale(1.1);
 }
+
 
 /* Animations */
 @keyframes fadeSlideUp {
