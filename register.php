@@ -23,7 +23,7 @@
             <div class="form-btn-container">
                 <button class="form-btn">Register</button>
             </div>
-            <p>Need an account? <a class="logo-colour no-dec" href="./login.php">Login</a></p>
+            <p>Have an account? <a class="logo-colour no-dec" href="./login.php">Login</a></p>
         </form>
     </main>
 </body>
