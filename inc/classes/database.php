@@ -2,16 +2,11 @@
 require_once "../config.php";
 class Database
 {
-    // Connection constants
-    private const DB_NAME = 'your_database_name';
-    private const DB_HOST = 'localhost';
-    private const DB_USER = 'your_username';
-    private const DB_PASSWORD = 'your_password';
-
-    // Private PDO instance
+    private const DB_NAME = DB_NAME;
+    private const DB_HOST = DB_HOST;
+    private const DB_USER = DB_USER;
+    private const DB_PASSWORD = DB_PASSWORD;
     private PDO $pdo = null;
-
-    // Constructor initializes the PDO connection
     public function __construct()
     {
         $dsn = 'mysql:host=' . self::DB_HOST . ';dbname=' . self::DB_NAME . ';charset=utf8mb4';
