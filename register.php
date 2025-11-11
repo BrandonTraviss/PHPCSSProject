@@ -13,6 +13,10 @@
                 <input id="username" name="username" type="text" placeholder="Username">
             </div>
             <div class="input-container">
+                <label for="email" class="label-row-register">Email</label>
+                <input id="email" name="email" type="email" placeholder="email">
+            </div>
+            <div class="input-container">
                 <label for="password" class="label-row-register">Password</label>
                 <input id="password" name="password" type="password" placeholder="Password">                
             </div>
