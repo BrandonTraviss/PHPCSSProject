@@ -1,113 +1,70 @@
 <?php
-    $pageTitle = "AracdiaWorks";
-    $pageDescription = "Explore ArcadiaWorks handcrafted vintage arcade cabinets—authentic retro gaming experiences built with modern precision. Custom designs, premium materials, and timeless nostalgia for collectors and enthusiasts.";
-    include_once "./inc/templates/meta.php";
-    include_once "./inc/templates/header.php";
+$pageTitle = "AracdiaWorks";
+$pageDescription = "Explore ArcadiaWorks handcrafted vintage arcade cabinets—authentic retro gaming experiences built with modern precision. Custom designs, premium materials, and timeless nostalgia for collectors and enthusiasts.";
+include_once "./inc/templates/meta.php";
+include_once "./inc/templates/header.php";
+require_once './inc/classes/Crud.php';
+$crud = new Crud();
+$products = $crud->getAllProducts();
+
+if (!empty($products)) {
+    $randomKey = array_rand($products);
+    $featuredProduct = $products[$randomKey];
+    unset($products[$randomKey]);
+    $products = array_values($products);
+}
 ?>
+
 <body>
     <main>
         <section class="featured-section fade-in">
-            <!-- Randomly Selected from products -->
-            <article class="featured-product">
-                <h1 class="featured-title">F<span class="logo-colour-2">eatured</span>  A<span class="logo-colour-2">rcade</span>  M<span class="logo-colour-2">achine</span></h1>
-                <div class="featured-left">
-                    <!-- Grab from Database -->
-                    <h1 class="featured-product-title">Pacman</h1>
-                    <div class="featured-img-container">
-                        <!-- Grab from Database -->
-                        <img src="./upload/pacman.png" alt="">
+        <h1 class="featured-title">F<span class="logo-colour-2">eatured</span> A<span class="logo-colour-2">rcade</span> M<span class="logo-colour-2">achine</span></h1>
+            <?php if (isset($featuredProduct)):
+                ?>
+                <article class="featured-product">
+                    <div class="featured-left">
+                        <h1 class="featured-product-title"><?php echo htmlspecialchars($featuredProduct['productTitle']) ?></h1>
+                        <div class="featured-img-container">
+                            <img src="./<?php echo htmlspecialchars($featuredProduct['imgLink']) ?>" alt="">
+                        </div>
                     </div>
-                </div>
-                <div class="featured-right">
-                    <h2 class="logo-colour">Description</h2>
-                    <!-- Grab from Database -->
-                    <p class="featured-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde sunt ducimus magni, dignissimos enim quis, at vero, omnis voluptates laboriosam amet ex nesciunt consequuntur. Quas, doloribus eligendi. Ab iure eius sapiente, at, quas natus eligendi perspiciatis officia eveniet beatae unde ad ex temporibus delectus, voluptatum vitae veniam obcaecati sequi impedit.</p>
-                    <!-- Grab from Database -->
-                    <h3 class="logo-colour-2">Condition: Refurbished</h3>
-                    <div class="featured-cart-price">
-                        <a href="" class="main-btn">Add To Cart</a>
-                        <!-- Grab from Database -->
-                        <p class="featured-price">$599.99</p>
+                    <div class="featured-right">
+                        <h2 class="logo-colour">Description</h2>
+                        <p class="featured-description"><?php echo htmlspecialchars($featuredProduct['productDescription']) ?></p>
+                        <h3 class="logo-colour-2">Condition: <?php echo htmlspecialchars($featuredProduct['productCondition']) ?></h3>
+                        <div class="featured-cart-price">
+                            <a href="" class="main-btn">Add To Cart</a>
+                            <p class="featured-price">$<?php echo htmlspecialchars($featuredProduct['productPrice']) ?></p>
+                        </div>
                     </div>
-                </div>
-            </article>
+                </article>
+            <?php else: ?>
+                <p class="no-featured-product text-centre">No Featured Product</p>
+            <?php endif; ?>
         </section>
 
         <section class="products-list">
             <h2 class="products-header">A<span class="logo-colour-2">rcade</span> M<span class="logo-colour-2">achines</span></h2>
             <div class="products-container">
-        <!-- Card information pulled from Database -->
-                <article class="product-card">
-                    <h2 class="logo-colour-2">Double Dragon</h2>
-                    <div class="product-card-img-container">
-                        <img src="./upload/doubledragon.png" alt="">
-                    </div>
-                    <p class="product-card-price">$630.99</p>
-                    <div class="product-card-links">
-                        <a href="" class="dark-btn">More Details</a>
-                        <a href="" class="main-btn">Add To Cart</a>
-                    </div>
-                </article>
-            <!-- Card information pulled from Database -->
-                <article class="product-card">
-                    <h2 class="logo-colour-2">Dungeons & Dragons</h2>
-                    <div class="product-card-img-container">
-                        <img src="./upload/dungeonsDragons.png" alt="Dungeons & Dragons">
-                    </div>
-                    <p class="product-card-price">$729.89</p>
-                    <div class="product-card-links">
-                        <a href="" class="dark-btn">More Details</a>
-                        <a href="" class="main-btn">Add To Cart</a>
-                    </div>
-                </article>
-            <!-- Card information pulled from Database -->
-                <article class="product-card">
-                    <h2 class="logo-colour-2">Gauntlet Legends</h2>
-                    <div class="product-card-img-container">
-                        <img src="./upload/gauntletLegends.png" alt="Gauntlet Legends">
-                    </div>
-                    <p class="product-card-price">$729.89</p>
-                    <div class="product-card-links">
-                        <a href="" class="dark-btn">More Details</a>
-                        <a href="" class="main-btn">Add To Cart</a>
-                    </div>
-                </article>
-            <!-- Card information pulled from Database -->
-                <article class="product-card">
-                    <h2 class="logo-colour-2">Rampage World Tour</h2>
-                    <div class="product-card-img-container">
-                        <img src="./upload/rampageWorldTour.png" alt="Rampage World Tour">
-                    </div>
-                    <p class="product-card-price">$830.99</p>
-                    <div class="product-card-links">
-                        <a href="" class="dark-btn">More Details</a>
-                        <a href="" class="main-btn">Add To Cart</a>
-                    </div>
-                </article>
-            <!-- Card information pulled from Database -->
-                <article class="product-card">
-                    <h2 class="logo-colour-2">Tekken</h2>
-                    <div class="product-card-img-container">
-                        <img src="./upload/tekken.png" alt="Tekken">
-                    </div>
-                    <p class="product-card-price">$579.99</p>
-                    <div class="product-card-links">
-                        <a href="" class="dark-btn">More Details</a>
-                        <a href="" class="main-btn">Add To Cart</a>
-                    </div>
-                </article>
-            <!-- Card information pulled from Database -->
-                <article class="product-card">
-                    <h2 class="logo-colour-2">Time Crisis</h2>
-                    <div class="product-card-img-container">
-                        <img src="./upload/timeCrisis.png" alt="">
-                    </div>
-                    <p class="product-card-price">$985.99</p>
-                    <div class="product-card-links">
-                        <a href="" class="dark-btn">More Details</a>
-                        <a href="" class="main-btn">Add To Cart</a>
-                    </div>
-                </article>
+                <?php if (!empty($products)) {
+                    foreach ($products as $product): ?>
+                        <article class="product-card">
+                            <h2 class="logo-colour-2"><?php echo htmlspecialchars($product['productTitle']) ?></h2>
+                            <div class="product-card-img-container">
+                                <img src="./<?php echo htmlspecialchars($product['imgLink']) ?>" alt="">
+                            </div>
+                            <p class="product-card-price">$<?php echo htmlspecialchars($product['productPrice']) ?></p>
+                            <div class="product-card-links">
+                                <a href="./product.php?ID=<?php echo htmlspecialchars($product['ID']) ?>" class="dark-btn">More Details</a>
+                                <a href="" class="main-btn">Add To Cart</a>
+                            </div>
+                        </article>
+                <?php endforeach;
+                } else {
+                    echo "<p>No products found.</p>";
+                }
+                ?>
+
             </div>
         </section>
     </main>

@@ -59,13 +59,14 @@ class Crud extends Database
         }
 
         if (!empty($errors)) {
+            var_dump($errors);
             return $errors;
         }
 
         $params = [
             ":imgLink"           => $formData["imgLink"],
             ":productTitle"      => $formData["productTitle"],
-            ":productDescription"=> $formData["productDescription"],
+            ":productDescription" => $formData["productDescription"],
             ":productPrice"      => $formData["productPrice"],
             ":productCondition"  => $formData["productCondition"]
         ];
@@ -146,7 +147,7 @@ class Crud extends Database
         $params = [
             ":imgLink"           => $formData["imgLink"],
             ":productTitle"      => $formData["productTitle"],
-            ":productDescription"=> $formData["productDescription"],
+            ":productDescription" => $formData["productDescription"],
             ":productPrice"      => $formData["productPrice"],
             ":productCondition"  => $formData["productCondition"],
             ":id"                => $id

@@ -480,19 +480,19 @@ blockquote {
     gap: 1rem;
 }
 /* SHOP */
+.featured-section{
+    background: linear-gradient(to bottom, var(--header-bg), var(--main-bg), var(--second-bg));
+}
 .featured-product {
     display: grid;
     padding: 2rem;
     padding-block: 2rem;
     grid-template-columns: 1f 1fr;
     grid-template-areas:
-        "featured-title featured-title"
         "featured-left featured-right";
-    background: linear-gradient(to bottom, var(--header-bg), var(--main-bg), var(--second-bg));
 }
 
 .featured-title {
-    grid-area: featured-title;
     text-align: center;
     font-size: 1.75rem;
     color: var(--logo-colour);
@@ -545,6 +545,8 @@ blockquote {
 
 .products-list {
     display: flex;
+    text-align: center;
+    flex-direction: column;
     flex-wrap: wrap;
     padding: 2rem;
     padding-block: 4rem;

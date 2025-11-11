@@ -17,42 +17,48 @@ $old = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fileData = $_FILES['productImage'];
-    $fileExt = $validation->validateImage($fileData);
 
-    $old = [
-        "productTitle" => $_POST["productTitle"],
-        "productDescription" => $_POST["productDescription"],
-        "productPrice" => $_POST["productPrice"],
-        "productCondition" => $_POST["productCondition"]
-    ];
+    if ($fileData['error'] !== UPLOAD_ERR_OK) {
+        $errorMessage = "Upload error: " . $fileData['error'];
+    } else {
+        $fileExt = $validation->validateImage($fileData);
 
-    if ($fileExt !== false) {
-        $imagePath = $fileHandler->saveImage($fileData, $fileExt);
+        $old = [
+            "productTitle" => $_POST["productTitle"],
+            "productDescription" => $_POST["productDescription"],
+            "productPrice" => $_POST["productPrice"],
+            "productCondition" => $_POST["productCondition"]
+        ];
 
-        if ($imagePath !== false) {
-            $formData = [
-                "imgLink" => $imagePath,
-                "productTitle" => $_POST["productTitle"],
-                "productDescription" => $_POST["productDescription"],
-                "productPrice" => $_POST["productPrice"],
-                "productCondition" => $_POST["productCondition"]
-            ];
+        if ($fileExt !== false) {
+            $imagePath = $fileHandler->saveImage($fileData, $fileExt);
 
-            $result = $crud->createProduct($formData);
+            if ($imagePath !== false) {
+                $formData = [
+                    "imgLink" => $imagePath,
+                    "productTitle" => $_POST["productTitle"],
+                    "productDescription" => $_POST["productDescription"],
+                    "productPrice" => $_POST["productPrice"],
+                    "productCondition" => $_POST["productCondition"]
+                ];
+                $result = $crud->createProduct($formData);
 
-            if ($result === true) {
-                $successMessage = "Product created successfully!";
-                $old = [];
-            } elseif (is_array($result)) {
-                $errors = $result;
+                if ($result === true) {
+                    $successMessage = "Product created successfully!";
+                    $old = [];
+                } elseif (is_array($result)) {
+                    $errors = $result;
+                    error_log("Validation errors: " . print_r($errors, true));
+                } else {
+                    $errorMessage = "Failed to create product.";
+                    error_log("CreateProduct returned false. FormData: " . print_r($formData, true));
+                }
             } else {
-                $errorMessage = "Failed to create product.";
+                $errorMessage = "File upload failed.";
             }
         } else {
-            $errorMessage = "File upload failed.";
+            $errorMessage = "Invalid image file.";
         }
-    } else {
-        $errorMessage = "Invalid image file.";
     }
 }
 ?>
@@ -84,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="input-container">
                 <label for="productTitle">Product Title:</label>
                 <input type="text" id="productTitle" name="productTitle"
-                       value="<?php echo htmlspecialchars($old['productTitle'] ?? '') ?>" required>
+                    value="<?php echo htmlspecialchars($old['productTitle'] ?? '') ?>" required>
             </div>
 
             <div class="input-container">
@@ -95,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="input-container">
                 <label for="productPrice">Price (CAD):</label>
                 <input type="number" id="productPrice" name="productPrice" step="0.01"
-                       value="<?php echo htmlspecialchars($old['productPrice'] ?? '') ?>" required>
+                    value="<?php echo htmlspecialchars($old['productPrice'] ?? '') ?>" required>
             </div>
 
             <div class="input-container">
@@ -117,4 +123,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 
 <?php include_once "./inc/templates/footer.php"; ?>
+
 </html>
