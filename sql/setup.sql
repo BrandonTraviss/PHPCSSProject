@@ -1,5 +1,6 @@
 CREATE TABLE products (
     ID INT PRIMARY KEY AUTO_INCREMENT,
+    imgLink VARCHAR(255) NOT NULL,
     productTitle VARCHAR(255) NOT NULL,
     productDescription VARCHAR(255),
     productPrice DECIMAL(10, 2) NOT NULL,

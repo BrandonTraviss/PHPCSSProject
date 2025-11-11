@@ -1,12 +1,12 @@
 <?php
-require_once "../config.php";
+require_once "./inc/config.php";
 class Database
 {
     private const DB_NAME = DB_NAME;
     private const DB_HOST = DB_HOST;
     private const DB_USER = DB_USER;
     private const DB_PASSWORD = DB_PASSWORD;
-    private PDO $pdo = null;
+    protected PDO $pdo;
     public function __construct()
     {
         $dsn = 'mysql:host=' . self::DB_HOST . ';dbname=' . self::DB_NAME . ';charset=utf8mb4';
