@@ -882,7 +882,6 @@ details p {
 @media (max-width: 1024px) {
     .featured-product {
         grid-template-areas:
-            "featured-title"
             "featured-left"
             "featured-right";
         justify-content: center;
