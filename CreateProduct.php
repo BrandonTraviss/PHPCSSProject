@@ -2,7 +2,8 @@
 require_once './inc/classes/Crud.php';
 require_once './inc/classes/FileHandler.php';
 require_once './inc/classes/Validation.php';
-
+$pageTitle = "ArcadiaWorks | Create Product";
+$pageDescription = "Add products to the database this is for admins only.";
 $crud = new Crud();
 $fileHandler = new FileHandler();
 $validation = new Validation();
