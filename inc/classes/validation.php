@@ -1,7 +1,7 @@
 <?php
 class Validation
 {
-    public function validateImage(array $fileData): string|false
+    public function validateImage(array $fileData)
     {
         if (empty($fileData['name'])) {
             return false;
@@ -28,5 +28,24 @@ class Validation
         }
 
         return $fileExt;
+    }
+    public function validatePrice($price)
+    {
+        return is_numeric($price) && $price > 0;
+    }
+    public function validateProductTitle($title)
+    {
+        $title = trim($title);
+        return strlen($title) > 0 && strlen($title) <= 100;
+    }
+    public function validateProductDescription($description)
+    {
+        $description = trim($description);
+        return strlen($description) <= 255;
+    }
+    public function validateCondition($condition): bool
+    {
+        $validConditions = ['New', 'Used', 'Refurbished'];
+        return in_array($condition, $validConditions, true);
     }
 }
