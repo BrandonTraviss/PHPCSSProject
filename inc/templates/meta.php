@@ -9,7 +9,3 @@
     <link rel="icon" href="./src/img/favicon.ico" type="image/x-icon">
     <title><?php echo htmlspecialchars($pageTitle) ?></title>
 </head>
-<body>
-    
-</body>
-</html>
