@@ -3,10 +3,24 @@
     $pageDescription = "Explore ArcadiaWorks handcrafted vintage arcade cabinets—authentic retro gaming experiences built with modern precision. Custom designs, premium materials, and timeless nostalgia for collectors and enthusiasts.";
     include_once "./inc/templates/meta.php";
     include_once "./inc/templates/header.php";
+    require_once './inc/classes/Crud.php';
+    require_once './inc/classes/Validation.php';
+    $crud = new Crud();
+    $validation = new Validation();
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $formData = [
+            "username" => $_POST["username"],
+            "email" => $_POST["email"],
+            "password" => $_POST["password"],
+            "confirmPassword" => $_POST["confirmPassword"]
+        ];
+        $crud->registerUser($formData);
+    }
 ?>
+
 <body class="register-body">
     <main>
-        <form action="" class="register-form">
+        <form action="" class="register-form" method="POST">
             <h2 class="mb-2">Register</h2>
             <div class="input-container">
                 <label for="username" class="label-row-register">Username</label>
@@ -18,11 +32,11 @@
             </div>
             <div class="input-container">
                 <label for="password" class="label-row-register">Password</label>
-                <input id="password" name="password" type="password" placeholder="Password">                
+                <input id="password" name="password" type="password" placeholder="Password">
             </div>
             <div class="input-container">
                 <label for="confirmPassword" class="label-row-register">Confirm Password</label>
-                <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm Password">                
+                <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm Password">
             </div>
             <div class="form-btn-container">
                 <button class="form-btn">Register</button>
