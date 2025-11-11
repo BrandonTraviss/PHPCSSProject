@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['delete']) && is_numeric
         header("Location: viewproducts.php?deleted=1");
         exit;
     } else {
-        echo "<p class='error'>❌ Failed to delete product.</p>";
+        echo "<p class='error'>Failed to delete product.</p>";
     }
 }
 ?>
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['delete']) && is_numeric
         <section class="product-list">
             <h2>All Products</h2>
             <?php if (isset($_GET['deleted'])): ?>
-                <div class="message success">✅ Product deleted successfully.</div>
+                <div class="message success">Product deleted successfully.</div>
             <?php endif; ?>
             <?php
             $products = $crud->getAllProducts();
