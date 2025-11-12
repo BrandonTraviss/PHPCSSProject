@@ -4,7 +4,7 @@ require_once './inc/classes/FileHandler.php';
 require_once './inc/classes/Validation.php';
 
 $pageTitle = "ArcadiaWorks | Create Product";
-$pageDescription = "Add products to the database this is for admins only.";
+$pageDescription = "Add products to the database — admin access only.";
 
 $crud = new Crud();
 $fileHandler = new FileHandler();
@@ -16,48 +16,43 @@ $errors = [];
 $old = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $fileData = $_FILES['productImage'];
-
-    if ($fileData['error'] !== UPLOAD_ERR_OK) {
-        $errorMessage = "Upload error: " . $fileData['error'];
+    $old = [
+        "productTitle" => $_POST["productTitle"],
+        "productDescription" => $_POST["productDescription"],
+        "productPrice" => $_POST["productPrice"],
+        "productCondition" => $_POST["productCondition"]
+    ];
+    $formErrors = $validation->validateProductForm($old);
+    if (!empty($formErrors)) {
+        $errors = $formErrors;
+        $errorMessage = "Please fix the errors below.";
     } else {
-        $fileExt = $validation->validateImage($fileData);
+        $fileData = $_FILES['productImage'];
 
-        $old = [
-            "productTitle" => $_POST["productTitle"],
-            "productDescription" => $_POST["productDescription"],
-            "productPrice" => $_POST["productPrice"],
-            "productCondition" => $_POST["productCondition"]
-        ];
+        if ($fileData['error'] !== UPLOAD_ERR_OK) {
+            $errorMessage = "Upload error: " . $fileData['error'];
+        } else {
+            $fileExt = $validation->validateImage($fileData);
 
-        if ($fileExt !== false) {
-            $imagePath = $fileHandler->saveImage($fileData, $fileExt);
-
-            if ($imagePath !== false) {
-                $formData = [
-                    "imgLink" => $imagePath,
-                    "productTitle" => $_POST["productTitle"],
-                    "productDescription" => $_POST["productDescription"],
-                    "productPrice" => $_POST["productPrice"],
-                    "productCondition" => $_POST["productCondition"]
-                ];
-                $result = $crud->createProduct($formData);
-
-                if ($result === true) {
-                    $successMessage = "Product created successfully!";
-                    $old = [];
-                } elseif (is_array($result)) {
-                    $errors = $result;
-                    error_log("Validation errors: " . print_r($errors, true));
+            if ($fileExt !== false) {
+                $imagePath = $fileHandler->saveImage($fileData, $fileExt);
+                if ($imagePath !== false) {
+                    $formData = $old;
+                    $formData['imgLink'] = $imagePath;
+                    $result = $crud->createProduct($formData);
+                    if ($result === true) {
+                        $successMessage = "Product created successfully!";
+                        $old = [];
+                    } else {
+                        $errorMessage = "Failed to create product.";
+                        error_log("CreateProduct returned false. FormData: " . print_r($formData, true));
+                    }
                 } else {
-                    $errorMessage = "Failed to create product.";
-                    error_log("CreateProduct returned false. FormData: " . print_r($formData, true));
+                    $errorMessage = "File upload failed.";
                 }
             } else {
-                $errorMessage = "File upload failed.";
+                $errorMessage = "Invalid image file.";
             }
-        } else {
-            $errorMessage = "Invalid image file.";
         }
     }
 }
@@ -73,16 +68,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if ($successMessage): ?>
             <div class="message success"><?php echo $successMessage ?></div>
         <?php elseif ($errorMessage): ?>
-            <div class="message error"><?php echo $errorMessage ?></div>
+            <p class="error-colour"><?php echo $errorMessage ?></p>
         <?php endif; ?>
 
         <?php if (!empty($errors)): ?>
             <div class="message error">
-                <ul>
                     <?php foreach ($errors as $field => $msg): ?>
-                        <li><?php echo htmlspecialchars($msg) ?></li>
+                        <p class="error-colour"><?php echo htmlspecialchars($msg) ?></p>
                     <?php endforeach; ?>
-                </ul>
             </div>
         <?php endif; ?>
 
@@ -114,8 +107,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </select>
             </div>
 
-            <label for="productImage">Product Image:</label>
-            <input type="file" id="productImage" name="productImage" accept=".jpg,.jpeg,.png,.gif" required>
+            <div class="input-container">
+                <label for="productImage">Product Image:</label>
+                <input type="file" id="productImage" name="productImage" accept=".jpg,.jpeg,.png,.gif" required>
+                <img id="imagePreview" src="#" alt="Image Preview" style="display:none; max-width:300px; margin-top:10px; border:1px solid #ccc; padding:5px;">
+            </div>
 
             <button type="submit" class="main-btn">Create Product</button>
         </form>
@@ -123,5 +119,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 
 <?php include_once "./inc/templates/footer.php"; ?>
-
 </html>

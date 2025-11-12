@@ -37,61 +37,37 @@ class Crud extends Database
         }
     }
 
-    public function createProduct(array $formData): bool|array
-    {
-        $validator = new Validation();
-        $errors = [];
+public function createProduct(array $formData)
+{
+    $params = [
+        ":imgLink"           => $formData["imgLink"],
+        ":productTitle"      => $formData["productTitle"],
+        ":productDescription"=> $formData["productDescription"],
+        ":productPrice"      => $formData["productPrice"],
+        ":productCondition"  => $formData["productCondition"]
+    ];
 
-        if (!$validator->validateProductTitle($formData['productTitle'])) {
-            $errors['productTitle'] = "Title must be 1–100 characters.";
-        }
+    $sql = "INSERT INTO products (
+                imgLink,
+                productTitle,
+                productDescription,
+                productPrice,
+                productCondition
+            ) VALUES (
+                :imgLink,
+                :productTitle,
+                :productDescription,
+                :productPrice,
+                :productCondition
+            )";
 
-        if (!$validator->validateProductDescription($formData['productDescription'])) {
-            $errors['productDescription'] = "Description must be under 255 characters.";
-        }
-
-        if (!$validator->validatePrice($formData['productPrice'])) {
-            $errors['productPrice'] = "Price must be a positive number.";
-        }
-
-        if (!$validator->validateCondition($formData['productCondition'])) {
-            $errors['productCondition'] = "Condition must be New, Used, or Refurbished.";
-        }
-
-        if (!empty($errors)) {
-            var_dump($errors);
-            return $errors;
-        }
-
-        $params = [
-            ":imgLink"           => $formData["imgLink"],
-            ":productTitle"      => $formData["productTitle"],
-            ":productDescription" => $formData["productDescription"],
-            ":productPrice"      => $formData["productPrice"],
-            ":productCondition"  => $formData["productCondition"]
-        ];
-
-        $sql = "INSERT INTO products (
-                    imgLink,
-                    productTitle,
-                    productDescription,
-                    productPrice,
-                    productCondition
-                ) VALUES (
-                    :imgLink,
-                    :productTitle,
-                    :productDescription,
-                    :productPrice,
-                    :productCondition
-                )";
-
-        try {
-            $stmt = $this->pdo->prepare($sql);
-            return $stmt->execute($params);
-        } catch (PDOException $e) {
-            return false;
-        }
+    try {
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute($params);
+    } catch (PDOException $e) {
+        return false;
     }
+}
 
     public function getAllProducts(): array
     {
@@ -175,6 +151,9 @@ class Crud extends Database
 
         try {
             $stmt = $this->pdo->prepare($sql);
+            $fileHandler = new FileHandler();
+            $product = $this->getProduct($id);
+            $fileHandler->deleteImage($product['imgLink']);
             return $stmt->execute([':id' => $id]);
         } catch (PDOException $e) {
             return false;

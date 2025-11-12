@@ -5,7 +5,6 @@ require_once './inc/classes/Validation.php';
 
 $pageTitle = "ArcadiaWorks | Edit Product";
 $pageDescription = "Edit existing product details. Admin access only.";
-
 $crud = new Crud();
 $fileHandler = new FileHandler();
 $validation = new Validation();
@@ -14,11 +13,9 @@ $successMessage = '';
 $errorMessage = '';
 $errors = [];
 $old = [];
-
-// Get product ID from URL
 $productId = $_GET['id'] ?? null;
-$product = $productId ? $crud->getProduct($productId) : null;
 
+$product = $productId ? $crud->getProduct($productId) : null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $product) {
     $fileData = $_FILES['productImage'];
     $fileExt = $validation->validateImage($fileData);
@@ -38,9 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $product) {
         "productPrice" => $_POST["productPrice"],
         "productCondition" => $_POST["productCondition"]
     ];
-
     $old = $formData;
-
     $result = $crud->updateProduct($productId, $formData);
 
     if ($result === true) {
@@ -84,44 +79,59 @@ if (!$product) {
         <?php endif; ?>
 
         <?php if ($product): ?>
-        <form action="" method="POST" enctype="multipart/form-data" class="create-product-form">
-            <div class="input-container">
-                <label for="productTitle">Product Title:</label>
-                <input type="text" id="productTitle" name="productTitle"
-                       value="<?php echo htmlspecialchars($old['productTitle'] ?? $product['productTitle']) ?>" required>
-            </div>
+            <form action="" method="POST" enctype="multipart/form-data" class="create-product-form">
+                <div class="input-container">
+                    <label for="productTitle">Product Title:</label>
+                    <input type="text" id="productTitle" name="productTitle"
+                        value="<?php echo htmlspecialchars($old['productTitle'] ?? $product['productTitle']) ?>" required>
+                </div>
 
-            <div class="input-container">
-                <label for="productDescription">Description:</label>
-                <textarea id="productDescription" name="productDescription" rows="4"><?php echo htmlspecialchars($old['productDescription'] ?? $product['productDescription']) ?></textarea>
-            </div>
+                <div class="input-container">
+                    <label for="productDescription">Description:</label>
+                    <textarea id="productDescription" name="productDescription" rows="4"><?php echo htmlspecialchars($old['productDescription'] ?? $product['productDescription']) ?></textarea>
+                </div>
 
-            <div class="input-container">
-                <label for="productPrice">Price (CAD):</label>
-                <input type="number" id="productPrice" name="productPrice" step="0.01"
-                       value="<?php echo htmlspecialchars($old['productPrice'] ?? $product['productPrice']) ?>" required>
-            </div>
+                <div class="input-container">
+                    <label for="productPrice">Price (CAD):</label>
+                    <input type="number" id="productPrice" name="productPrice" step="0.01"
+                        value="<?php echo htmlspecialchars($old['productPrice'] ?? $product['productPrice']) ?>" required>
+                </div>
 
-            <div class="input-container">
-                <label for="productCondition">Condition:</label>
-                <select id="productCondition" name="productCondition" required>
-                    <option value="">Select</option>
-                    <option value="New" <?php echo ($old['productCondition'] ?? $product['productCondition']) === 'New' ? 'selected' : '' ?>>New</option>
-                    <option value="Used" <?php echo ($old['productCondition'] ?? $product['productCondition']) === 'Used' ? 'selected' : '' ?>>Used</option>
-                    <option value="Refurbished" <?php echo ($old['productCondition'] ?? $product['productCondition']) === 'Refurbished' ? 'selected' : '' ?>>Refurbished</option>
-                </select>
-            </div>
+                <div class="input-container">
+                    <label for="productCondition">Condition:</label>
+                    <select id="productCondition" name="productCondition" required>
+                        <option value="">Select</option>
+                        <option value="New" <?php echo ($old['productCondition'] ?? $product['productCondition']) === 'New' ? 'selected' : '' ?>>New</option>
+                        <option value="Used" <?php echo ($old['productCondition'] ?? $product['productCondition']) === 'Used' ? 'selected' : '' ?>>Used</option>
+                        <option value="Refurbished" <?php echo ($old['productCondition'] ?? $product['productCondition']) === 'Refurbished' ? 'selected' : '' ?>>Refurbished</option>
+                    </select>
+                </div>
 
-            <label for="productImage">Replace Image (optional):</label>
-            <input type="file" id="productImage" name="productImage" accept=".jpg,.jpeg,.png,.gif">
-            <p>Current Image:</p>
-            <img src="./<?php echo htmlspecialchars($product['imgLink']) ?>" alt="Current product image" style="max-width:150px;"><br>
+                <label for="productImage">Replace Image (optional):</label>
 
-            <button type="submit" class="main-btn">Update Product</button>
-        </form>
+
+                <div class="input-container">
+                    <p>Current Image:</p>
+
+                    <input type="file" id="productImage" name="productImage" accept=".jpg,.jpeg,.png,.gif" class="white-text" required>
+                    <div class="create-product-image-preview-container">
+                        <div class="current-image-container">
+                            <p>Current Image</p>
+                            <img src="./<?php echo htmlspecialchars($product['imgLink']) ?>" alt="Current product image">
+                        </div>
+                        <div id="imagePreviewContainer" class="image-preview-container">
+                            <p>New Image</p>
+                            <img id="imagePreview" src="#" alt="Image Preview" />
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="main-btn">Update Product</button>
+                <a href="./viewproducts.php" class="dark-btn">Go Back</a>
+            </form>
         <?php endif; ?>
     </main>
 </body>
 
 <?php include_once "./inc/templates/footer.php"; ?>
+
 </html>

@@ -1,7 +1,7 @@
 <?php
 class FileHandler
 {
-    public function saveImage(array $fileData, string $fileExt): string|false
+    public function saveImage(array $fileData, string $fileExt)
     {
         $newFileName = uniqid('', true) . '.' . $fileExt;
         $destination = 'upload/' . $newFileName;
@@ -10,6 +10,13 @@ class FileHandler
             return $destination;
         }
 
+        return false;
+    }
+        public function deleteImage(string $imgLink)
+    {
+            if (file_exists($imgLink)) {
+                return unlink($imgLink);
+            }
         return false;
     }
 }

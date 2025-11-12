@@ -14,4 +14,28 @@ document.addEventListener("DOMContentLoaded", () => {
             menuIcon.src = "./src/img/hamburger.svg";
         }
     });
+
+    const imageInput = document.getElementById('productImage');
+    const preview = document.getElementById('imagePreview');
+
+    if (imageInput && preview) {
+        const originalSrc = preview.getAttribute('data-original') || preview.src;
+
+        imageInput.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = originalSrc;
+            }
+        });
+    }
+
+
 });

@@ -13,6 +13,7 @@
     --font-body: "Newsreader", serif;
     --font-index-hero: "Jersey 20", sans-serif;
 
+    --error-colour: rgb(255, 107, 107);
     --logo-colour: #DBA323;
     --logo-colour-2: #ffd269;
     --hover-btn-colour: #ffbe27;
@@ -463,26 +464,67 @@ blockquote {
     background-color: var(--hover-btn-colour);
     transform: scale(1.05);
 }
+/* View Products Admin */
+.product-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+}
+.products-admin-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.product-view-image-container{
+    width: 150px;
+}
+.product-view-image-container img{
+    width: 100%;
+}
+.product-view {
+    flex: 0 0 275px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    gap: 1rem;
+    border-radius: 8px;
+}
+.products-admin-container .product-view:nth-child(odd) {
+    background-color: var(--main-bg); /* Light gray or your preferred color */
+}
 
-/* Create Product */
-.create-product-main{
+.products-admin-container .product-view:nth-child(even) {
+    background-color: var(--second-bg); /* Slightly blue-tinted or contrasting color */
+}
+
+/* Create Product Admin*/
+.create-product-main {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 5rem;
 }
-.create-product-form{
+
+.create-product-form {
     width: 90vw;
     max-width: 400px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
+
 /* SHOP */
-.featured-section{
+.featured-section {
     background: linear-gradient(to bottom, var(--header-bg), var(--main-bg), var(--second-bg));
 }
+
 .featured-product {
     display: grid;
     padding: 2rem;
@@ -626,68 +668,83 @@ blockquote {
 /* About */
 .about-main {
     padding: 1rem;
-        background: linear-gradient(to bottom, var(--header-bg), var(--main-bg),var(--second-bg), var(--header-bg));
-    
+    background: linear-gradient(to bottom, var(--header-bg), var(--main-bg), var(--second-bg), var(--header-bg));
+
 }
-.about-main-title-container{
+
+.about-main-title-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .about-title {
     text-align: center;
     color: var(--logo-colour);
     margin-bottom: 1.5rem;
 }
-.about-text{
+
+.about-text {
     max-width: 60ch;
 }
-.profiles-container{
+
+.profiles-container {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
     justify-content: space-around;
 }
-.about-profile{
+
+.about-profile {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: fit-content;
 }
-.about-profile-pic-container{
+
+.about-profile-pic-container {
     width: 20rem;
 }
-.about-profile-pic-container img{
+
+.about-profile-pic-container img {
     width: 100%;
     border-radius: 8px;
 }
-.about-mission{
+
+.about-mission {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     margin-top: 2rem;
     gap: 2rem;
 }
-.mission-left{
+
+.mission-left {
     display: flex;
     align-items: center;
 }
-.mission-left>p{
+
+.mission-left>p {
     max-width: 20ch;
 }
-.mission-svg{
+
+.mission-svg {
     width: 5rem;
 }
-.mission-svg img{
+
+.mission-svg img {
     width: 100%;
 }
-.arcadia-about-img-container{
-        max-width: 500px;
+
+.arcadia-about-img-container {
+    max-width: 500px;
     width: 90vw;
 }
-.arcadia-about-img-container img{
+
+.arcadia-about-img-container img {
     width: 100%;
 }
+
 /* Accoridon */
 .accordion {
     max-width: 700px;
@@ -727,15 +784,42 @@ details p {
 }
 
 /* Modular Classes */
+/* Image Preview */
+.create-product-image-preview-container{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.image-preview-container,
+.current-image-container {
+    max-width: 150px;
+}
+.current-image-container img{
+    width: 100%;
+}
+.image-preview-container img{
+    display: none;
+    width: 100%;
+}
 
 /* Spacing */
 .mb-2 {
     margin-bottom: 2rem;
 }
-.text-centre{
+
+.text-centre {
     text-align: center;
 }
+
 /* Colours */
+.white-text {
+    color: var(--offwhite-colour);
+}
+
+.error-colour {
+    color: var(--error-colour);
+}
+
 .logo-colour {
     color: var(--logo-colour);
 }

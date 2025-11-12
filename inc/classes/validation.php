@@ -43,9 +43,31 @@ class Validation
         $description = trim($description);
         return strlen($description) <= 255;
     }
-    public function validateCondition($condition): bool
+    public function validateCondition($condition)
     {
         $validConditions = ['New', 'Used', 'Refurbished'];
         return in_array($condition, $validConditions, true);
     }
+    public function validateProductForm(array $formData)
+{
+    $errors = [];
+
+    if (!$this->validateProductTitle($formData['productTitle'])) {
+        $errors['productTitle'] = "Title must be 1–100 characters.";
+    }
+
+    if (!$this->validateProductDescription($formData['productDescription'])) {
+        $errors['productDescription'] = "Description must be under 255 characters.";
+    }
+
+    if (!$this->validatePrice($formData['productPrice'])) {
+        $errors['productPrice'] = "Price must be a positive number.";
+    }
+
+    if (!$this->validateCondition($formData['productCondition'])) {
+        $errors['productCondition'] = "Condition must be New, Used, or Refurbished.";
+    }
+
+    return $errors;
+}
 }

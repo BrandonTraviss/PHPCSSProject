@@ -26,36 +26,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['delete']) && is_numeric
             <?php if (isset($_GET['deleted'])): ?>
                 <div class="message success">Product deleted successfully.</div>
             <?php endif; ?>
-            <?php
-            $products = $crud->getAllProducts();
+            <div class="products-admin-container">
+                <?php
+                $products = $crud->getAllProducts();
 
-            if (!empty($products)) {
-                foreach ($products as $product): ?>
-                    <article class="product-view">
-                        <img src="./<?php echo htmlspecialchars($product['imgLink']) ?>" alt="<?php echo htmlspecialchars($product['productTitle']) ?>" style="max-width:150px;"><br>
-
-                        <p>Title: <?php echo htmlspecialchars($product['productTitle']) ?></p>
-                        <p>Description: <?php echo htmlspecialchars($product['productDescription']) ?></p>
-                        <p>Price: $<?php echo number_format($product['productPrice'], 2) ?></p>
-
-                        <label for="condition-<?php echo $product['ID'] ?>">Condition:</label>
-                        <select id="condition-<?php echo $product['ID'] ?>" name="productCondition" disabled>
-                            <option value="New" <?php echo $product['productCondition'] === 'New' ? 'selected' : '' ?>>New</option>
-                            <option value="Used" <?php echo $product['productCondition'] === 'Used' ? 'selected' : '' ?>>Used</option>
-                            <option value="Refurbished" <?php echo $product['productCondition'] === 'Refurbished' ? 'selected' : '' ?>>Refurbished</option>
-                        </select>
-                        <a href="editproduct.php?id=<?php echo $product['ID'] ?>">Edit Product</a>
-                        <a href="viewproducts.php?delete=<?= $product['ID'] ?>"
-                            onclick="return confirm('Are you sure you want to delete this product?');">
-                            Delete Product
-                        </a>
-                    </article>
-                    <hr>
-            <?php endforeach;
-            } else {
-                echo "<p>No products found.</p>";
-            }
-            ?>
+                if (!empty($products)) {
+                    foreach ($products as $product): ?>
+                        <article class="product-view">
+                            <div class="product-view-image-container">
+                                <img src="./<?php echo htmlspecialchars($product['imgLink']) ?>" alt="<?php echo htmlspecialchars($product['productTitle']) ?>">
+                            </div>
+                            <p>Title: <?php echo htmlspecialchars($product['productTitle']) ?></p>
+                            <p>Description: <?php echo htmlspecialchars($product['productDescription']) ?></p>
+                            <p>Price: $<?php echo number_format($product['productPrice'], 2) ?></p>
+                            <p>Condition: <?php echo htmlspecialchars($product['productCondition']) ?></p>
+                            <a href="editproduct.php?id=<?php echo $product['ID'] ?>">Edit Product</a>
+                            <a href="viewproducts.php?delete=<?= $product['ID'] ?>"
+                                onclick="return confirm('Are you sure you want to delete this product?');">
+                                Delete Product
+                            </a>
+                        </article>
+                <?php endforeach;
+                } else {
+                    echo "<p>No products found.</p>";
+                }
+                ?>
+            </div>
         </section>
     </main>
 </body>
