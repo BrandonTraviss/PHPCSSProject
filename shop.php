@@ -53,6 +53,7 @@ if (!empty($products)) {
                             <div class="product-card-img-container">
                                 <img src="./<?php echo htmlspecialchars($product['imgLink']) ?>" alt="">
                             </div>
+                            <p class="logo-colour-2">Condition: <?php echo htmlspecialchars($product['productCondition']) ?></p>
                             <p class="product-card-price">$<?php echo htmlspecialchars($product['productPrice']) ?></p>
                             <div class="product-card-links">
                                 <a href="./product.php?ID=<?php echo htmlspecialchars($product['ID']) ?>" class="dark-btn">More Details</a>

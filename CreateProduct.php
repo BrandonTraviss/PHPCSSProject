@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h2 style="text-align:center;">Add a New Product</h2>
 
         <?php if ($successMessage): ?>
-            <div class="message success"><?php echo $successMessage ?></div>
+            <p class="logo-colour"><?php echo $successMessage ?></p>
         <?php elseif ($errorMessage): ?>
             <p class="error-colour"><?php echo $errorMessage ?></p>
         <?php endif; ?>

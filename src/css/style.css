@@ -1,4 +1,5 @@
 /* FONT IMPORTS */
+
 /* Navbar Font */
 @import url('https://fonts.googleapis.com/css2?family=Prosto+One&display=swap');
 /* Body Font */
@@ -496,11 +497,11 @@ blockquote {
     border-radius: 8px;
 }
 .products-admin-container .product-view:nth-child(odd) {
-    background-color: var(--main-bg); /* Light gray or your preferred color */
+    background-color: var(--main-bg);
 }
 
 .products-admin-container .product-view:nth-child(even) {
-    background-color: var(--second-bg); /* Slightly blue-tinted or contrasting color */
+    background-color: var(--second-bg);
 }
 
 /* Create Product Admin*/
