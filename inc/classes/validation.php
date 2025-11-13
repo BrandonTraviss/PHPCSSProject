@@ -1,6 +1,7 @@
 <?php
 class Validation
 {
+    // Validates Image returns false or file path
     public function validateImage(array $fileData)
     {
         if (empty($fileData['name'])) {
@@ -29,25 +30,30 @@ class Validation
 
         return $fileExt;
     }
+    // Validates Price returns true or false
     public function validatePrice($price)
     {
         return is_numeric($price) && $price > 0;
     }
+    // Validates Product Title returns true or false
     public function validateProductTitle($title)
     {
         $title = trim($title);
         return strlen($title) > 0 && strlen($title) <= 100;
     }
+    // Validates Description returns true or false
     public function validateProductDescription($description)
     {
         $description = trim($description);
         return strlen($description) <= 255;
     }
+    // Validates Condition returns true or false
     public function validateCondition($condition)
     {
         $validConditions = ['New', 'Used', 'Refurbished'];
         return in_array($condition, $validConditions, true);
     }
+    // Used to Validate all form data and add appropriate message
     public function validateProductForm(array $formData)
 {
     $errors = [];
