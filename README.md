@@ -36,6 +36,6 @@ This project is a web application built with PHP, HTML/CSS, and SQL, featuring t
 ## Setup Instructions
 
 1. Create MySQL database (e.g., ecommerce_db)
-2. Run the included SQL file to create the required table. (Ensure the database you created is selected)
+2. Run the included SQL file to create the required tables. (Ensure the database you created is selected)
 3. Setup your config.php file with your DB_NAME, DB_USERNAME, DB_PASS, DB_HOST_NAME
 4. Use the register page to create Admin account to add data
