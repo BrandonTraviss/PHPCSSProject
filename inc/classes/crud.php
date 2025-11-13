@@ -37,17 +37,17 @@ class Crud extends Database
         }
     }
 
-public function createProduct(array $formData)
-{
-    $params = [
-        ":imgLink"           => $formData["imgLink"],
-        ":productTitle"      => $formData["productTitle"],
-        ":productDescription"=> $formData["productDescription"],
-        ":productPrice"      => $formData["productPrice"],
-        ":productCondition"  => $formData["productCondition"]
-    ];
+    public function createProduct(array $formData)
+    {
+        $params = [
+            ":imgLink"           => $formData["imgLink"],
+            ":productTitle"      => $formData["productTitle"],
+            ":productDescription" => $formData["productDescription"],
+            ":productPrice"      => $formData["productPrice"],
+            ":productCondition"  => $formData["productCondition"]
+        ];
 
-    $sql = "INSERT INTO products (
+        $sql = "INSERT INTO products (
                 imgLink,
                 productTitle,
                 productDescription,
@@ -61,13 +61,13 @@ public function createProduct(array $formData)
                 :productCondition
             )";
 
-    try {
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute($params);
-    } catch (PDOException $e) {
-        return false;
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute($params);
+        } catch (PDOException $e) {
+            return false;
+        }
     }
-}
 
     public function getAllProducts(): array
     {
@@ -120,22 +120,30 @@ public function createProduct(array $formData)
             return $errors;
         }
 
+        $product = $this->getProduct($id);
+        $newImgLink = $formData["imgLink"];
+
+        if (!empty($product['imgLink']) && $product['imgLink'] !== $newImgLink) {
+            $fileHandler = new FileHandler();
+            $fileHandler->deleteImage($product['imgLink']);
+        }
+
         $params = [
-            ":imgLink"           => $formData["imgLink"],
-            ":productTitle"      => $formData["productTitle"],
+            ":imgLink"            => $newImgLink,
+            ":productTitle"       => $formData["productTitle"],
             ":productDescription" => $formData["productDescription"],
-            ":productPrice"      => $formData["productPrice"],
-            ":productCondition"  => $formData["productCondition"],
-            ":id"                => $id
+            ":productPrice"       => $formData["productPrice"],
+            ":productCondition"   => $formData["productCondition"],
+            ":id"                 => $id
         ];
 
         $sql = "UPDATE products SET
-                    imgLink = :imgLink,
-                    productTitle = :productTitle,
-                    productDescription = :productDescription,
-                    productPrice = :productPrice,
-                    productCondition = :productCondition
-                WHERE ID = :id";
+                imgLink = :imgLink,
+                productTitle = :productTitle,
+                productDescription = :productDescription,
+                productPrice = :productPrice,
+                productCondition = :productCondition
+            WHERE ID = :id";
 
         try {
             $stmt = $this->pdo->prepare($sql);

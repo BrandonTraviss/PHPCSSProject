@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $product) {
 
     if ($result === true) {
         $successMessage = "Product updated successfully!";
-        $product = $crud->getProduct($productId); // refresh product data
+        $product = $crud->getProduct($productId);
         $old = [];
     } elseif (is_array($result)) {
         $errors = $result;
@@ -113,7 +113,7 @@ if (!$product) {
                 <div class="input-container">
                     <p>Current Image:</p>
 
-                    <input type="file" id="productImage" name="productImage" accept=".jpg,.jpeg,.png,.gif" class="white-text" required>
+                    <input type="file" id="productImage" name="productImage" accept=".jpg,.jpeg,.png,.gif" class="white-text">
                     <div class="create-product-image-preview-container">
                         <div class="current-image-container">
                             <p>Current Image</p>
