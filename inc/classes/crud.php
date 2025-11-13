@@ -4,14 +4,16 @@ require_once "./inc/classes/Validation.php";
 
 class Crud extends Database
 {
+    // Register User 
     public function registerUser($formData): bool
     {
+        // Compares password and confirmPassword
         if ($formData["password"] !== $formData["confirmPassword"]) {
             return false;
         }
-
+        // hashes password for storing in Database
         $hashedPassword = password_hash($formData["password"], PASSWORD_DEFAULT);
-
+        // Create assoc array to use as params
         $params = [
             ":username" => $formData["username"],
             ":email"    => $formData["email"],
@@ -36,9 +38,11 @@ class Crud extends Database
             return false;
         }
     }
-
+    // Create Product
     public function createProduct(array $formData)
     {
+        // Assoc array to be used in prepared statement
+        // Validation for inputs is done in createproduct.php
         $params = [
             ":imgLink"           => $formData["imgLink"],
             ":productTitle"      => $formData["productTitle"],
@@ -68,7 +72,7 @@ class Crud extends Database
             return false;
         }
     }
-
+    // Get All Products
     public function getAllProducts(): array
     {
         $sql = "SELECT * FROM products ORDER BY ID DESC";
@@ -80,7 +84,7 @@ class Crud extends Database
             return [];
         }
     }
-
+    // Get Singular Product
     public function getProduct(int $id): array|false
     {
         $sql = "SELECT * FROM products WHERE ID = :id LIMIT 1";
@@ -94,12 +98,12 @@ class Crud extends Database
             return false;
         }
     }
-
+    // Update Product
     public function updateProduct(int $id, array $formData): bool|array
     {
         $validator = new Validation();
         $errors = [];
-
+        // Validate inputs, image validation is done inside editproduct.php
         if (!$validator->validateProductTitle($formData['productTitle'])) {
             $errors['productTitle'] = "Title must be 1–100 characters.";
         }
@@ -119,7 +123,7 @@ class Crud extends Database
         if (!empty($errors)) {
             return $errors;
         }
-
+        // Get product information stored in database to check if the imgLink has changed
         $product = $this->getProduct($id);
         $newImgLink = $formData["imgLink"];
 
@@ -127,7 +131,7 @@ class Crud extends Database
             $fileHandler = new FileHandler();
             $fileHandler->deleteImage($product['imgLink']);
         }
-
+        // Params to be used in query
         $params = [
             ":imgLink"            => $newImgLink,
             ":productTitle"       => $formData["productTitle"],
@@ -152,13 +156,14 @@ class Crud extends Database
             return false;
         }
     }
-
+    // Delete Product
     public function deleteProduct(int $id): bool
     {
         $sql = "DELETE FROM products WHERE ID = :id";
 
         try {
             $stmt = $this->pdo->prepare($sql);
+            // Delete the file from the uploads directory
             $fileHandler = new FileHandler();
             $product = $this->getProduct($id);
             $fileHandler->deleteImage($product['imgLink']);
