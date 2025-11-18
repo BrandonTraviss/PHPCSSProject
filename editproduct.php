@@ -70,11 +70,9 @@ if (!$product) {
 
         <?php if (!empty($errors)): ?>
             <div class="message error">
-                <ul>
                     <?php foreach ($errors as $field => $msg): ?>
-                        <li><?php echo htmlspecialchars($msg) ?></li>
+                        <p><?php echo htmlspecialchars($msg) ?></p>
                     <?php endforeach; ?>
-                </ul>
             </div>
         <?php endif; ?>
 
