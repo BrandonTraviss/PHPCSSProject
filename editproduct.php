@@ -1,4 +1,5 @@
 <?php
+
 require_once './inc/classes/Crud.php';
 require_once './inc/classes/FileHandler.php';
 require_once './inc/classes/Validation.php';
@@ -54,24 +55,33 @@ if (!$product) {
     $errorMessage = "Product not found.";
 }
 ?>
-
+<?php require_once "./inc/classes/Session.php"; ?>
 <?php include_once "./inc/templates/meta.php"; ?>
-<?php include_once "./inc/templates/header.php"; ?>
+<?php if(!Session::isLoggedIn()){
+    require_once "./inc/templates/header.php";
+} else {
+    require_once "./inc/templates/adminHeader.php";
+}?>
+    <?php if(!Session::isLoggedIn()){
+        header("Location:login.php");
+        exit;
+    }
+?>
 
 <body>
     <main class="create-product-main">
         <h2 style="text-align:center;">Edit Product</h2>
 
         <?php if ($successMessage): ?>
-            <div class="message success"><?php echo $successMessage ?></div>
+            <div class="message-success"><?php echo $successMessage ?></div>
         <?php elseif ($errorMessage): ?>
-            <div class="message error"><?php echo $errorMessage ?></div>
+            <div class="text-error"><?php echo $errorMessage ?></div>
         <?php endif; ?>
 
         <?php if (!empty($errors)): ?>
-            <div class="message error">
+            <div class="text-error">
                     <?php foreach ($errors as $field => $msg): ?>
-                        <p><?php echo htmlspecialchars($msg) ?></p>
+                        <p class="text-error"><?php echo htmlspecialchars($msg) ?></p>
                     <?php endforeach; ?>
             </div>
         <?php endif; ?>
@@ -130,6 +140,6 @@ if (!$product) {
     </main>
 </body>
 
-<?php include_once "./inc/templates/footer.php"; ?>
+<?php require_once "./inc/templates/footer.php"; ?>
 
 </html>

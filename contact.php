@@ -1,8 +1,13 @@
 <?php
     $pageTitle = "AracdiaWorks";
     $pageDescription = "Explore ArcadiaWorks handcrafted vintage arcade cabinets—authentic retro gaming experiences built with modern precision. Custom designs, premium materials, and timeless nostalgia for collectors and enthusiasts.";
+    require_once "./inc/classes/Session.php";
     include_once "./inc/templates/meta.php";
-    include_once "./inc/templates/header.php";
+if(!Session::isLoggedIn()){
+    require_once "./inc/templates/header.php";
+} else {
+    require_once "./inc/templates/adminHeader.php";
+}
 ?>
 <body>
     <main class="contact-main">
@@ -29,4 +34,4 @@
         </form>
     </main>
 </body>
-<?php include_once "./inc/templates/footer.php" ?>
+<?php require_once "./inc/templates/footer.php" ?>

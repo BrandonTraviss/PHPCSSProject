@@ -57,9 +57,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
+<?php require_once "./inc/classes/Session.php"; ?>
 <?php include_once "./inc/templates/meta.php"; ?>
-<?php include_once "./inc/templates/header.php"; ?>
+<?php if(!Session::isLoggedIn()){
+    require_once "./inc/templates/header.php";
+} else {
+    require_once "./inc/templates/adminHeader.php";
+}?>
+<?php if (!Session::isLoggedIn()) {
+    header("Location:login.php");
+    exit;
+}
+?>
 
 <body>
     <main class="create-product-main">
@@ -73,9 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <?php if (!empty($errors)): ?>
             <div class="message error">
-                    <?php foreach ($errors as $field => $msg): ?>
-                        <p class="error-colour"><?php echo htmlspecialchars($msg) ?></p>
-                    <?php endforeach; ?>
+                <?php foreach ($errors as $field => $msg): ?>
+                    <p class="error-colour"><?php echo htmlspecialchars($msg) ?></p>
+                <?php endforeach; ?>
             </div>
         <?php endif; ?>
 
@@ -118,5 +127,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </main>
 </body>
 
-<?php include_once "./inc/templates/footer.php"; ?>
+<?php require_once "./inc/templates/footer.php"; ?>
+
 </html>

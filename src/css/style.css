@@ -101,7 +101,9 @@ header {
     background-color: var(--header-bg);
     z-index: 100;
 }
-
+.admin-nav-container{
+    text-align: center;
+}
 .nav-logo {
     width: 10vw;
     min-width: 7rem;
@@ -984,7 +986,9 @@ details p {
     .desktop-menu {
         display: none;
     }
-
+    nav{
+            justify-content: space-between;
+    }
     .active {
         display: flex;
     }

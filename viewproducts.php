@@ -1,13 +1,21 @@
 <?php
+$pageTitle = "ArcadiaWorks | Create Product";
+$pageDescription = "Add products to the database this is for admins only.";
 require_once './inc/classes/Crud.php';
 require_once './inc/classes/FileHandler.php';
 require_once './inc/classes/Validation.php';
-$pageTitle = "ArcadiaWorks | Create Product";
-$pageDescription = "Add products to the database this is for admins only.";
-include_once './inc/templates/meta.php';
-include_once './inc/templates/header.php';
+require_once "./inc/classes/Session.php";
+require_once './inc/templates/meta.php';
+if (!Session::isLoggedIn()) {
+    require_once "./inc/templates/header.php";
+} else {
+    require_once "./inc/templates/adminHeader.php";
+}
+if (!Session::isLoggedIn()) {
+    header("Location:login.php");
+    exit;
+}
 $crud = new Crud();
-$products = $crud->getAllProducts();
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     $deleteId = (int)$_GET['delete'];
     if ($crud->deleteProduct($deleteId)) {
@@ -56,4 +64,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['delete']) && is_numeric
     </main>
 </body>
 
-<?php include_once "./inc/templates/footer.php" ?>
+<?php require_once "./inc/templates/footer.php" ?>

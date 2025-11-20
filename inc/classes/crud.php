@@ -62,6 +62,22 @@ class Crud extends Database
             return false;
         }
     }
+    /**
+     * Summary of login
+     * @param mixed $username
+     * @param mixed $password
+     * @return mixed user data array on succes, false on fail
+     */
+    public function login($username,$password){
+        if(empty($username) || empty($password)){
+            return false;
+        }
+        $user = $this->getUser($username);
+        if($user && password_verify($password,$user['password'])){
+            return $user;
+        }
+        return false;
+    }
     // Create Product
     public function createProduct(array $formData)
     {

@@ -1,8 +1,13 @@
 <?php
-    $pageTitle = "ArcadiaWorks";
-    $pageDescription = "Welcome to the ArcadiaWorks your one stop shop for arcade cabs";
-    include "./inc/templates/meta.php";
-    include "./inc/templates/header.php";
+$pageTitle = "ArcadiaWorks";
+$pageDescription = "Welcome to the ArcadiaWorks your one stop shop for arcade cabs";
+require_once "./inc/classes/Session.php";
+require_once "./inc/templates/meta.php";
+if (!Session::isLoggedIn()) {
+    require_once "./inc/templates/header.php";
+} else {
+    require_once "./inc/templates/adminHeader.php";
+}
 ?>
 
 <body class="index-body">
@@ -45,18 +50,18 @@
                     <blockquote>
                         "Reliving the classics has become my stress release. It's like I have my own personal slice of the '80s here at home."
                     </blockquote>
-                        <p class="name-location">
-                            <span class="name">Angela Brooks</span>, <span class="location">Barrie, ON</span>
-                        </p>
+                    <p class="name-location">
+                        <span class="name">Angela Brooks</span>, <span class="location">Barrie, ON</span>
+                    </p>
                 </article>
 
                 <article class="testimonial">
                     <blockquote>
                         "Every time I fire up my cabinet, it's pure nostalgia. ArcadiaWorks nailed it!"
                     </blockquote>
-                        <p class="name-location">
-                            <span class="name">Brent Warwick</span>, <span class="location">Toronto, ON</span>
-                        </p>
+                    <p class="name-location">
+                        <span class="name">Brent Warwick</span>, <span class="location">Toronto, ON</span>
+                    </p>
                 </article>
 
 
@@ -64,9 +69,9 @@
                     <blockquote>
                         "From the joystick feel to the CRT glow, it's like the arcade never left. ArcadiaWorks brought it all back."
                     </blockquote>
-                        <p class="name-location">
-                            <span class="name">Brian Baker</span>, <span class="location">Midland, ON</span>
-                        </p>
+                    <p class="name-location">
+                        <span class="name">Brian Baker</span>, <span class="location">Midland, ON</span>
+                    </p>
                 </article>
 
 
@@ -74,9 +79,9 @@
                     <blockquote>
                         "It's like stepping into my childhood arcade-every sound, every pixel, perfectly preserved."
                     </blockquote>
-                        <p class="name-location">
-                            <span class="name">Steve White</span>, <span class="location">Orillia, ON</span>
-                        </p>
+                    <p class="name-location">
+                        <span class="name">Steve White</span>, <span class="location">Orillia, ON</span>
+                    </p>
                 </article>
 
             </div>
@@ -86,5 +91,5 @@
     </main>
 </body>
 <?php
-include "./inc/templates/footer.php";
+require_once "./inc/templates/footer.php";
 ?>

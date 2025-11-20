@@ -1,3 +1,6 @@
+<?php
+    Session::start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

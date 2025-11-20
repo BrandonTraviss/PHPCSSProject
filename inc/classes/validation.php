@@ -6,7 +6,6 @@ class Validation
     {
         $this->crud = new Crud();
     }
-
     // Validates Image returns false or file path
     public function validateImage(array $fileData)
     {
