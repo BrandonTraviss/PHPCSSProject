@@ -5,7 +5,7 @@ require_once "./inc/classes/Validation.php";
 class Crud extends Database
 {
     // Register User 
-    public function registerUser($formData): bool
+    public function registerUser($formData)
     {
         // Compares password and confirmPassword
         if ($formData["password"] !== $formData["confirmPassword"]) {
@@ -35,6 +35,30 @@ class Crud extends Database
             return $stmt->execute($params);
         } catch (PDOException $e) {
             echo $e->getMessage();
+            return false;
+        }
+    }
+    // Get User by username
+    public function getUser($username) {
+        $sql = "SELECT * FROM users WHERE username = :username LIMIT 1";
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([':username' => $username]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $user ?: false;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    // Get User by Email
+        public function getUserByEmail($email) {
+        $sql = "SELECT * FROM users WHERE email = :email LIMIT 1";
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([':email' => $email]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $user ?: false;
+        } catch (PDOException $e) {
             return false;
         }
     }
@@ -73,7 +97,7 @@ class Crud extends Database
         }
     }
     // Get All Products
-    public function getAllProducts(): array
+    public function getAllProducts()
     {
         $sql = "SELECT * FROM products ORDER BY ID DESC";
         try {
@@ -85,7 +109,7 @@ class Crud extends Database
         }
     }
     // Get Singular Product
-    public function getProduct(int $id): array|false
+    public function getProduct(int $id)
     {
         $sql = "SELECT * FROM products WHERE ID = :id LIMIT 1";
 
@@ -99,7 +123,7 @@ class Crud extends Database
         }
     }
     // Update Product
-    public function updateProduct(int $id, array $formData): bool|array
+    public function updateProduct(int $id, array $formData)
     {
         $validator = new Validation();
         $errors = [];
@@ -157,7 +181,7 @@ class Crud extends Database
         }
     }
     // Delete Product
-    public function deleteProduct(int $id): bool
+    public function deleteProduct(int $id)
     {
         $sql = "DELETE FROM products WHERE ID = :id";
 

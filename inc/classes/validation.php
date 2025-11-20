@@ -1,6 +1,12 @@
 <?php
 class Validation
 {
+    private $crud;
+        public function __construct()
+    {
+        $this->crud = new Crud();
+    }
+
     // Validates Image returns false or file path
     public function validateImage(array $fileData)
     {
@@ -55,25 +61,91 @@ class Validation
     }
     // Used to Validate all form data and add appropriate message
     public function validateProductForm(array $formData)
-{
-    $errors = [];
+    {
+        $errors = [];
 
-    if (!$this->validateProductTitle($formData['productTitle'])) {
-        $errors['productTitle'] = "Title must be 1–100 characters.";
+        if (!$this->validateProductTitle($formData['productTitle'])) {
+            $errors['productTitle'] = "Title must be 1-100 characters.";
+        }
+
+        if (!$this->validateProductDescription($formData['productDescription'])) {
+            $errors['productDescription'] = "Description must be under 255 characters.";
+        }
+
+        if (!$this->validatePrice($formData['productPrice'])) {
+            $errors['productPrice'] = "Price must be a positive number.";
+        }
+
+        if (!$this->validateCondition($formData['productCondition'])) {
+            $errors['productCondition'] = "Condition must be New, Used, or Refurbished.";
+        }
+
+        return $errors;
     }
+    // Validates Registering a User
+    public function validateRegisterForm(array $formData)
+    {
+        $usernameError = $this->validateUsername($formData['username']);
+        $emailError = $this->validateEmail($formData['email']);
+        $passwordError = $this->validatePassword($formData['password'],$formData['confirmPassword']);
 
-    if (!$this->validateProductDescription($formData['productDescription'])) {
-        $errors['productDescription'] = "Description must be under 255 characters.";
+        $errors = [
+            'username' => $usernameError,
+            'email' => $emailError,
+            'password' => $passwordError
+        ];
+        return $errors;
     }
+    // Validates username
+    public function validateUsername($username)
+    {   
+        $errors = [];
+        if($this->crud->getUser($username)){
+            $errors[] = "Username is already taken.";
+        }
+        if (strlen($username) > 20) {
+            $errors[] = "Username cannot exceed 20 characters in length.";
+        }
+        if (strpos($username, ' ')){
+            $errors[] = "Username cannot contain spaces.";
+        }
+        if(empty($errors)){
+            return false;
+        }
+        return $errors;
 
-    if (!$this->validatePrice($formData['productPrice'])) {
-        $errors['productPrice'] = "Price must be a positive number.";
     }
-
-    if (!$this->validateCondition($formData['productCondition'])) {
-        $errors['productCondition'] = "Condition must be New, Used, or Refurbished.";
+    // Validates Email
+    public function validateEmail($email)
+    {
+        $errors = [];
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = "Invalid Email Address.";
+        }
+        if($this->crud->getUserByEmail($email)){
+            $errors[] = "Email Address Taken.";
+        }
+        if(empty($errors)){
+            return false;
+        }
+        return $errors;
     }
-
-    return $errors;
-}
+    // Validates Password
+    public function validatePassword($password,$confirmPassword)
+    {
+        $errors = [];
+        if($password !== $confirmPassword){
+            $errors[] = "Passwords do not match.";
+        }
+        if (strlen($password) < 8) {
+            $errors[]= "Password must be atleast 8 characters in length and cannot contain a space.";
+        }
+        if (strpos($password, ' ')){
+            $errors = "Password must not contain spaces.";
+        }
+        if(empty($errors)){
+            return false;
+        }
+        return $errors;
+    }
 }

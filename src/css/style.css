@@ -424,7 +424,8 @@ blockquote {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: fit-content;
+    width: 80vw;
+    max-width: 600px;
     background-color: var(--card-bg);
     padding: 4rem;
     border-radius: 10px;
@@ -851,6 +852,12 @@ details p {
 }
 
 /* Multi Use Classes */
+.border-error{
+    border: 2px solid red;
+}
+.text-error{
+    color: red;
+}
 .main-btn {
     cursor: pointer;
     display: block;
