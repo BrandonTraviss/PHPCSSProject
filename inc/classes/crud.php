@@ -51,7 +51,7 @@ class Crud extends Database
         }
     }
     // Get User by Email
-        public function getUserByEmail($email) {
+    public function getUserByEmail($email) {
         $sql = "SELECT * FROM users WHERE email = :email LIMIT 1";
         try {
             $stmt = $this->pdo->prepare($sql);
@@ -62,6 +62,17 @@ class Crud extends Database
             return false;
         }
     }
+    public function getProductById($id){
+            $sql = "SELECT * FROM products WHERE ID = :ID LIMIT 1";
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([':ID' => $id]);
+            $product = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $product ?: false;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }    
     /**
      * Summary of login
      * @param mixed $username

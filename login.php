@@ -31,26 +31,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <body class="login-body">
-    <main>
-        <form action="login.php" class="login-form" method="POST">
-            <h2 class="mb-2">Login</h2>
-            <?php if ($error): ?>
-                <p class="text-error">Invalid Username or Password</p>
-            <?php endif; ?>
-            <div class="input-container">
-                <label for="username" class="label-row-login">Username</label>
-                <input id="username" name="username" type="text" placeholder="Username">
-            </div>
-            <div class="input-container">
-                <label for="password" class="label-row-login">Password</label>
-                <input id="password" name="password" type="password" placeholder="Password">
-            </div>
+    <main class="login-main">
+        <div>
+            <form action="login.php" class="login-form" method="POST">
+                <h2 class="mb-2">Login</h2>
+                <?php if ($error): ?>
+                    <p class="text-error">Invalid Username or Password</p>
+                <?php endif; ?>
+                <div class="input-container">
+                    <label for="username" class="label-row-login">Username</label>
+                    <input id="username" name="username" type="text" placeholder="Username">
+                </div>
+                <div class="input-container">
+                    <label for="password" class="label-row-login">Password</label>
+                    <input id="password" name="password" type="password" placeholder="Password">
+                </div>
 
-            <div class="form-btn-container">
-                <button class="form-btn">Login</button>
-            </div>
-            <p>Need an account? <a class="logo-colour no-dec" href="./register.php">Register</a></p>
-        </form>
+                <div class="form-btn-container">
+                    <button class="form-btn">Login</button>
+                </div>
+                <p>Need an account? <a class="logo-colour no-dec" href="./register.php">Register</a></p>
+            </form>
+        </div>
     </main>
 </body>
 <?php require_once "./inc/templates/footer.php" ?>

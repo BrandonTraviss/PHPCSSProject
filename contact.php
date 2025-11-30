@@ -5,6 +5,7 @@
     include_once "./inc/templates/meta.php";
 if(!Session::isLoggedIn()){
     require_once "./inc/templates/header.php";
+    require_once "./inc/templates/cta.php";
 } else {
     require_once "./inc/templates/adminHeader.php";
 }

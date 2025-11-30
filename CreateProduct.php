@@ -72,8 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <main class="create-product-main">
-        <h2 style="text-align:center;">Add a New Product</h2>
-
+        <h2>Add a New Product</h2>
         <?php if ($successMessage): ?>
             <p class="logo-colour"><?php echo $successMessage ?></p>
         <?php elseif ($errorMessage): ?>
@@ -118,8 +117,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="input-container">
                 <label for="productImage">Product Image:</label>
-                <input type="file" id="productImage" name="productImage" accept=".jpg,.jpeg,.png,.gif" required>
-                <img id="imagePreview" src="#" alt="Image Preview" style="display:none; max-width:300px; margin-top:10px; border:1px solid #ccc; padding:5px;">
+                <input type="file" id="productImage" name="productImage" accept=".jpg,.jpeg,.png,.gif" class="white-text" required>
+                <img id="imagePreview" src="#" alt="Image Preview" class="image-preview">
             </div>
 
             <button type="submit" class="main-btn">Create Product</button>

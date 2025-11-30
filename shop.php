@@ -22,7 +22,7 @@ if (!empty($products)) {
 
 <body>
     <main>
-        <section class="featured-section fade-in">
+        <section class="featured-section">
         <h1 class="featured-title">F<span class="logo-colour-2">eatured</span> A<span class="logo-colour-2">rcade</span> M<span class="logo-colour-2">achine</span></h1>
             <?php if (isset($featuredProduct)):
                 ?>
@@ -37,7 +37,7 @@ if (!empty($products)) {
                         <h2 class="logo-colour">Description</h2>
                         <p class="featured-description"><?php echo htmlspecialchars($featuredProduct['productDescription']) ?></p>
                         <h3 class="logo-colour-2">Condition: <?php echo htmlspecialchars($featuredProduct['productCondition']) ?></h3>
-                        <div class="featured-cart-price">
+                        <div class="inline-container">
                             <a href="" class="main-btn">Add To Cart</a>
                             <p class="featured-price">$<?php echo htmlspecialchars($featuredProduct['productPrice']) ?></p>
                         </div>

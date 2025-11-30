@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['delete']) && is_numeric
                             <p>Price: $<?php echo number_format($product['productPrice'], 2) ?></p>
                             <p>Condition: <?php echo htmlspecialchars($product['productCondition']) ?></p>
                             <a href="editproduct.php?id=<?php echo $product['ID'] ?>">Edit Product</a>
-                            <a href="viewproducts.php?delete=<?= $product['ID'] ?>"
+                            <a href="viewproducts.php?delete=<?php $product['ID'] ?>"
                                 onclick="return confirm('Are you sure you want to delete this product?');">
                                 Delete Product
                             </a>
