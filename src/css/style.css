@@ -442,7 +442,16 @@ blockquote {
     border-radius: 10px;
     gap: 1rem;
 }
-
+.input-row{
+    display: flex;
+    width: 100%;
+}
+.input-container-sm {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    max-width: 33%;
+}
 .input-container {
     display: flex;
     flex-direction: column;
@@ -477,7 +486,6 @@ blockquote {
     background-color: var(--hover-btn-colour);
     transform: scale(1.05);
 }
-
 /* View Products Admin */
 .product-list {
     display: flex;

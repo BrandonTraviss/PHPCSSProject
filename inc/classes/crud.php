@@ -39,7 +39,8 @@ class Crud extends Database
         }
     }
     // Get User by username
-    public function getUser($username) {
+    public function getUser($username)
+    {
         $sql = "SELECT * FROM users WHERE username = :username LIMIT 1";
         try {
             $stmt = $this->pdo->prepare($sql);
@@ -51,7 +52,8 @@ class Crud extends Database
         }
     }
     // Get User by Email
-    public function getUserByEmail($email) {
+    public function getUserByEmail($email)
+    {
         $sql = "SELECT * FROM users WHERE email = :email LIMIT 1";
         try {
             $stmt = $this->pdo->prepare($sql);
@@ -62,8 +64,9 @@ class Crud extends Database
             return false;
         }
     }
-    public function getProductById($id){
-            $sql = "SELECT * FROM products WHERE ID = :ID LIMIT 1";
+    public function getProductById($id)
+    {
+        $sql = "SELECT * FROM products WHERE ID = :ID LIMIT 1";
         try {
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([':ID' => $id]);
@@ -72,57 +75,79 @@ class Crud extends Database
         } catch (PDOException $e) {
             return false;
         }
-    }    
+    }
     /**
      * Summary of login
      * @param mixed $username
      * @param mixed $password
      * @return mixed user data array on succes, false on fail
      */
-    public function login($username,$password){
-        if(empty($username) || empty($password)){
+    public function login($username, $password)
+    {
+        if (empty($username) || empty($password)) {
             return false;
         }
         $user = $this->getUser($username);
-        if($user && password_verify($password,$user['password'])){
+        if ($user && password_verify($password, $user['password'])) {
             return $user;
         }
         return false;
     }
     // Create Product
     public function createProduct(array $formData)
-    {
-        // Assoc array to be used in prepared statement
-        // Validation for inputs is done in createproduct.php
-        $params = [
-            ":imgLink"           => $formData["imgLink"],
-            ":productTitle"      => $formData["productTitle"],
-            ":productDescription" => $formData["productDescription"],
-            ":productPrice"      => $formData["productPrice"],
-            ":productCondition"  => $formData["productCondition"]
-        ];
+{
+    // Assoc array to be used in prepared statement
+    // Validation for inputs is done in createproduct.php
+    $params = [
+        ":imgLink"             => $formData["imgLink"],
+        ":productTitle"        => $formData["productTitle"],
+        ":productDescription"  => $formData["productDescription"],
+        ":productPrice"        => $formData["productPrice"],
+        ":productCondition"    => $formData["productCondition"],
+        ":productWidth"        => $formData["productWidth"],
+        ":productHeight"       => $formData["productHeight"],
+        ":productDepth"        => $formData["productDepth"],
+        ":productManufacturer" => $formData["productManufacturer"],
+        ":productScreenSize"   => $formData["productScreenSize"],
+        ":productScreenType"   => $formData["productScreenType"],
+        ":productWeight"       => $_POST["productWeight"]
+    ];
 
-        $sql = "INSERT INTO products (
+    $sql = "INSERT INTO products (
                 imgLink,
                 productTitle,
                 productDescription,
                 productPrice,
-                productCondition
+                productCondition,
+                productWidth,
+                productHeight,
+                productDepth,
+                productManufacturer,
+                productScreenSize,
+                productScreenType,
+                productWeight
             ) VALUES (
                 :imgLink,
                 :productTitle,
                 :productDescription,
                 :productPrice,
-                :productCondition
+                :productCondition,
+                :productWidth,
+                :productHeight,
+                :productDepth,
+                :productManufacturer,
+                :productScreenSize,
+                :productScreenType,
+                :productWeight
             )";
 
-        try {
-            $stmt = $this->pdo->prepare($sql);
-            return $stmt->execute($params);
-        } catch (PDOException $e) {
-            return false;
-        }
+    try {
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute($params);
+    } catch (PDOException $e) {
+        return false;
     }
+}
     // Get All Products
     public function getAllProducts()
     {
@@ -158,17 +183,17 @@ class Crud extends Database
         if (!$validator->validateProductTitle($formData['productTitle'])) {
             $errors['productTitle'] = "Title must be 1-100 characters.";
         }
-
         if (!$validator->validateProductDescription($formData['productDescription'])) {
             $errors['productDescription'] = "Description must be under 255 characters.";
         }
-
         if (!$validator->validatePrice($formData['productPrice'])) {
             $errors['productPrice'] = "Price must be a positive number.";
         }
-
         if (!$validator->validateCondition($formData['productCondition'])) {
             $errors['productCondition'] = "Condition must be New, Used, or Refurbished.";
+        }
+        if (!$validator->validateIsNumberGreaterThanZero($formData['productScreenSize'])) {
+            $errors['productScreenSize'] = "Screen size must be a number greater than 0.";
         }
 
         if (!empty($errors)) {
@@ -184,21 +209,35 @@ class Crud extends Database
         }
         // Params to be used in query
         $params = [
-            ":imgLink"            => $newImgLink,
-            ":productTitle"       => $formData["productTitle"],
-            ":productDescription" => $formData["productDescription"],
-            ":productPrice"       => $formData["productPrice"],
-            ":productCondition"   => $formData["productCondition"],
-            ":id"                 => $id
+            ":imgLink"             => $newImgLink,
+            ":productTitle"        => $formData["productTitle"],
+            ":productDescription"  => $formData["productDescription"],
+            ":productPrice"        => $formData["productPrice"],
+            ":productCondition"    => $formData["productCondition"],
+            ":productWidth"        => $formData["productWidth"],
+            ":productHeight"       => $formData["productHeight"],
+            ":productDepth"        => $formData["productDepth"],
+            ":productManufacturer" => $formData["productManufacturer"],
+            ":productScreenSize"   => $formData["productScreenSize"],
+            ":productScreenType"   => $formData["productScreenType"],
+            ":productWeight"       => $_POST["productWeight"],
+            ":id"                  => $id
         ];
 
         $sql = "UPDATE products SET
-                imgLink = :imgLink,
-                productTitle = :productTitle,
-                productDescription = :productDescription,
-                productPrice = :productPrice,
-                productCondition = :productCondition
-            WHERE ID = :id";
+            imgLink = :imgLink,
+            productTitle = :productTitle,
+            productDescription = :productDescription,
+            productPrice = :productPrice,
+            productCondition = :productCondition,
+            productWidth = :productWidth,
+            productHeight = :productHeight,
+            productDepth = :productDepth,
+            productManufacturer = :productManufacturer,
+            productScreenSize = :productScreenSize,
+            productScreenType = :productScreenType,
+            productWeight = :productWeight
+        WHERE ID = :id";
 
         try {
             $stmt = $this->pdo->prepare($sql);

@@ -4,7 +4,14 @@ CREATE TABLE products (
     productTitle VARCHAR(255) NOT NULL,
     productDescription VARCHAR(255),
     productPrice DECIMAL(10, 2) NOT NULL,
-    productCondition ENUM('Used', 'New', 'Refurbished') NOT NULL
+    productCondition ENUM('Used', 'New', 'Refurbished') NOT NULL,
+    productWidth INT NOT NULL,
+    productHeight INT NOT NULL,
+    productDepth INT NOT NULL,
+    productManufacturer VARCHAR(100) NOT NULL,
+    productScreenSize INT NOT NULL,
+    productScreenType ENUM('CRT', 'LCD') NOT NULL,
+    productWeight INT NOT NULL
 );
 
 CREATE table users(
