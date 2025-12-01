@@ -1,7 +1,7 @@
 <header>
     <nav>
         <div class="admin-nav-container">
-            <a href="./index.php" class="logo-nav"><img class="nav-logo" src="./src/img/darkThemeLogo.png" alt="Home"></a>
+            <a href="./index.php" class="logo-nav"><img class="nav-logo" src="./src/img/darkThemeLogo.jpg" alt="Home"></a>
             <p><?php echo htmlspecialchars(Session::get('username')); ?></p>
         </div>
         <menu class="desktop-menu">

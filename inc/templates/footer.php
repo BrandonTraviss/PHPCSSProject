@@ -17,7 +17,7 @@
         </div>
         <div class="footer3">
             <div class="footer-logo-container">
-                <img src="./src/img/darkThemeLogo.png" alt="">
+                <img src="./src/img/darkThemeLogo.jpg" alt="">
             </div>
             <div class="socials-container">
                 <a href="#" class="footer-svg-container">
