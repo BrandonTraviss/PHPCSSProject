@@ -21,6 +21,7 @@
     --offwhite-colour: #F5F5F5;
     --card-bg: #0f0f0f;
     --form-bg: #000000b2;
+    --success: rgb(75, 255, 75);
 
     --main-bg: #0f0f11;
     --second-bg: #15151d;
@@ -843,6 +844,9 @@ details p {
 }
 
 /* Colours */
+.message-success{
+    color: var(--success);
+}
 .white-text {
     color: var(--offwhite-colour);
 }
