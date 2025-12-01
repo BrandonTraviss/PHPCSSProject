@@ -25,12 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $formErrors = $validation->validateProductForm($old);
     if (!empty($formErrors)) {
         $errors = $formErrors;
-        $errorMessage = "Please fix the errors below.";
     } else {
         $fileData = $_FILES['productImage'];
 
         if ($fileData['error'] !== UPLOAD_ERR_OK) {
-            $errorMessage = "Upload error: " . $fileData['error'];
+            $imgError = "Upload error: " . $fileData['error'];
         } else {
             $fileExt = $validation->validateImage($fileData);
 
@@ -44,14 +43,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $successMessage = "Product created successfully!";
                         $old = [];
                     } else {
-                        $errorMessage = "Failed to create product.";
+                        $imgError = "Failed to create product.";
                         error_log("CreateProduct returned false. FormData: " . print_r($formData, true));
                     }
                 } else {
-                    $errorMessage = "File upload failed.";
+                    $imgError = "File upload failed.";
                 }
             } else {
-                $errorMessage = "Invalid image file.";
+                $imgError = "Invalid image file. Cannot be SVG or over 2mb in size.";
             }
         }
     }
@@ -59,11 +58,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <?php require_once "./inc/classes/Session.php"; ?>
 <?php include_once "./inc/templates/meta.php"; ?>
-<?php if(!Session::isLoggedIn()){
+<?php if (!Session::isLoggedIn()) {
     require_once "./inc/templates/header.php";
 } else {
     require_once "./inc/templates/adminHeader.php";
-}?>
+} ?>
 <?php if (!Session::isLoggedIn()) {
     header("Location:login.php");
     exit;
@@ -75,8 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h2>Add a New Product</h2>
         <?php if ($successMessage): ?>
             <p class="logo-colour"><?php echo $successMessage ?></p>
-        <?php elseif ($errorMessage): ?>
-            <p class="error-colour"><?php echo $errorMessage ?></p>
         <?php endif; ?>
 
         <?php if (!empty($errors)): ?>
@@ -91,18 +88,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="input-container">
                 <label for="productTitle">Product Title:</label>
                 <input type="text" id="productTitle" name="productTitle"
+                    class="<?php echo isset($formErrors['productTitle']) ? 'border-error' : '';  ?>"
                     value="<?php echo htmlspecialchars($old['productTitle'] ?? '') ?>" required>
+                <?php if (isset($formErrors['productTitle'])): ?>
+                    <p class="text-error"><?php echo htmlspecialchars($formErrors['productTitle']) ?></p>
+                <?php endif; ?>
             </div>
 
             <div class="input-container">
                 <label for="productDescription">Description:</label>
-                <textarea id="productDescription" name="productDescription" rows="4"><?php echo htmlspecialchars($old['productDescription'] ?? '') ?></textarea>
+                <textarea class="<?php echo isset($formErrors['productDescription']) ? 'border-error' : '';  ?>" id="productDescription" name="productDescription" rows="4"><?php echo htmlspecialchars($old['productDescription'] ?? '') ?></textarea>
+                <?php if (isset($formErrors['productTitle'])): ?>
+                    <p class="text-error"><?php echo htmlspecialchars($formErrors['productDescription']) ?></p>
+                <?php endif; ?>
             </div>
 
             <div class="input-container">
                 <label for="productPrice">Price (CAD):</label>
                 <input type="number" id="productPrice" name="productPrice" step="0.01"
                     value="<?php echo htmlspecialchars($old['productPrice'] ?? '') ?>" required>
+                <?php if (isset($formErrors['productPrice'])): ?>
+                    <p class="text-error"><?php echo htmlspecialchars($formErrors['productPrice']) ?></p>
+                <?php endif; ?>
             </div>
 
             <div class="input-container">
@@ -113,11 +120,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <option value="Used" <?php echo ($old['productCondition'] ?? '') === 'Used' ? 'selected' : '' ?>>Used</option>
                     <option value="Refurbished" <?php echo ($old['productCondition'] ?? '') === 'Refurbished' ? 'selected' : '' ?>>Refurbished</option>
                 </select>
+                <?php if (isset($formErrors['productCondition'])): ?>
+                    <p class="text-error"><?php echo htmlspecialchars($formErrors['productCondition']) ?></p>
+                <?php endif; ?>
             </div>
 
             <div class="input-container">
                 <label for="productImage">Product Image:</label>
                 <input type="file" id="productImage" name="productImage" accept=".jpg,.jpeg,.png,.gif" class="white-text" required>
+                <?php if (isset($imgError)): ?>
+                    <p class="text-error"><?php echo htmlspecialchars($imgError) ?></p>
+                <?php endif; ?>
                 <img id="imagePreview" src="#" alt="Image Preview" class="image-preview">
             </div>
 

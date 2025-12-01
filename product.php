@@ -32,11 +32,19 @@ $crud = new Crud();
                     </div>
                     <div class="featured-right">
                         <div class="featured-cart-price">
-
                         </div>
                         <h2 class="logo-colour">Description</h2>
                         <p class="featured-description"><?php echo htmlspecialchars($product['productDescription']) ?></p>
                         <h3 class="logo-colour">Condition: <?php echo htmlspecialchars($product['productCondition']) ?></h3>
+                        <div class="inline-container">
+                            <p><span class="bold logo-colour-2">Dimensions: </span>22.6"D x 68.9"H x 72.5"W</p>
+                        </div>
+                        <div class="inline-container">
+                            <p><span class="bold logo-colour-2">Screen Type: </span> CRT</p>
+                        </div>
+                        <div class="inline-container">
+                            <p><span class="bold logo-colour-2">Screen Size: </span>24"</p>
+                        </div>
                         <div class="inline-container">
                             <a href="" class="main-btn">Add To Cart</a>
                             <p class="featured-price">$<?php echo htmlspecialchars($product['productPrice']) ?></p>

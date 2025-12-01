@@ -156,7 +156,7 @@ class Crud extends Database
         $errors = [];
         // Validate inputs, image validation is done inside editproduct.php
         if (!$validator->validateProductTitle($formData['productTitle'])) {
-            $errors['productTitle'] = "Title must be 1–100 characters.";
+            $errors['productTitle'] = "Title must be 1-100 characters.";
         }
 
         if (!$validator->validateProductDescription($formData['productDescription'])) {

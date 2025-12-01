@@ -1,5 +1,4 @@
 <?php
-
 require_once './inc/classes/Crud.php';
 require_once './inc/classes/FileHandler.php';
 require_once './inc/classes/Validation.php';
@@ -17,37 +16,45 @@ $old = [];
 $productId = $_GET['id'] ?? null;
 
 $product = $productId ? $crud->getProduct($productId) : null;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $product) {
     $fileData = $_FILES['productImage'];
-    $fileExt = $validation->validateImage($fileData);
     $imagePath = $product['imgLink'];
 
-    if (!empty($fileData['name']) && $fileExt !== false) {
-        $newPath = $fileHandler->saveImage($fileData, $fileExt);
-        if ($newPath !== false) {
-            $imagePath = $newPath;
+    // Only validate if a file was uploaded
+    if (!empty($fileData['name'])) {
+        $fileExt = $validation->validateImage($fileData);
+
+        if ($fileExt === false) {
+            $errors['productImage'] = "Invalid image format. Please upload a JPG, PNG, or GIF. Size must also be under 2mb";
+        } else {
+            $newPath = $fileHandler->saveImage($fileData, $fileExt);
+            if ($newPath !== false) {
+                $imagePath = $newPath;
+            } else {
+                $errors['productImage'] = "Failed to save image.";
+            }
         }
     }
 
-    $formData = [
-        "imgLink" => $imagePath,
-        "productTitle" => $_POST["productTitle"],
-        "productDescription" => $_POST["productDescription"],
-        "productPrice" => $_POST["productPrice"],
-        "productCondition" => $_POST["productCondition"]
-    ];
-    $old = $formData;
-    $result = $crud->updateProduct($productId, $formData);
+    if (empty($errors)) {
+        $formData = [
+            "imgLink" => $imagePath,
+            "productTitle" => $_POST["productTitle"],
+            "productDescription" => $_POST["productDescription"],
+            "productPrice" => $_POST["productPrice"],
+            "productCondition" => $_POST["productCondition"]
+        ];
+        $old = $formData;
 
-    if ($result === true) {
-        $successMessage = "Product updated successfully!";
-        $product = $crud->getProduct($productId);
-        $old = [];
-    } elseif (is_array($result)) {
-        $errors = $result;
+        $result = $crud->updateProduct($productId, $formData);
+
+        if ($result === true) {
+            $successMessage = "Product updated successfully!";
+            $product = $crud->getProduct($productId);
+            $old = [];
+        } 
         $errorMessage = "Please fix the errors below.";
-    } else {
-        $errorMessage = "Failed to update product.";
     }
 }
 
@@ -57,15 +64,15 @@ if (!$product) {
 ?>
 <?php require_once "./inc/classes/Session.php"; ?>
 <?php include_once "./inc/templates/meta.php"; ?>
-<?php if(!Session::isLoggedIn()){
+<?php if (!Session::isLoggedIn()) {
     require_once "./inc/templates/header.php";
 } else {
     require_once "./inc/templates/adminHeader.php";
-}?>
-    <?php if(!Session::isLoggedIn()){
-        header("Location:login.php");
-        exit;
-    }
+} ?>
+<?php if (!Session::isLoggedIn()) {
+    header("Location:login.php");
+    exit;
+}
 ?>
 
 <body>
@@ -74,16 +81,6 @@ if (!$product) {
 
         <?php if ($successMessage): ?>
             <div class="message-success"><?php echo $successMessage ?></div>
-        <?php elseif ($errorMessage): ?>
-            <div class="text-error"><?php echo $errorMessage ?></div>
-        <?php endif; ?>
-
-        <?php if (!empty($errors)): ?>
-            <div class="text-error">
-                    <?php foreach ($errors as $field => $msg): ?>
-                        <p class="text-error"><?php echo htmlspecialchars($msg) ?></p>
-                    <?php endforeach; ?>
-            </div>
         <?php endif; ?>
 
         <?php if ($product): ?>
@@ -91,18 +88,29 @@ if (!$product) {
                 <div class="input-container">
                     <label for="productTitle">Product Title:</label>
                     <input type="text" id="productTitle" name="productTitle"
+                        class="<?php echo isset($errors['productTitle']) ? 'border-error' : ''; ?>"
                         value="<?php echo htmlspecialchars($old['productTitle'] ?? $product['productTitle']) ?>" required>
+                    <?php if (isset($errors['productTitle'])): ?>
+                        <p class="text-error"><?php echo htmlspecialchars($errors['productTitle']) ?></p>
+                    <?php endif; ?>
                 </div>
 
                 <div class="input-container">
                     <label for="productDescription">Description:</label>
-                    <textarea id="productDescription" name="productDescription" rows="4"><?php echo htmlspecialchars($old['productDescription'] ?? $product['productDescription']) ?></textarea>
+                    <textarea class="<?php echo isset($errors['productDescription']) ? 'border-error' : ''; ?>" id="productDescription" name="productDescription" rows="4"><?php echo htmlspecialchars($old['productDescription'] ?? $product['productDescription']) ?></textarea>
+                    <?php if (isset($errors['productDescription'])): ?>
+                        <p class="text-error"><?php echo htmlspecialchars($errors['productDescription']) ?></p>
+                    <?php endif; ?>
                 </div>
 
                 <div class="input-container">
                     <label for="productPrice">Price (CAD):</label>
                     <input type="number" id="productPrice" name="productPrice" step="0.01"
+                        class="<?php echo isset($errors['productPrice']) ? 'border-error' : ''; ?>"
                         value="<?php echo htmlspecialchars($old['productPrice'] ?? $product['productPrice']) ?>" required>
+                    <?php if (isset($errors['productPrice'])): ?>
+                        <p class="text-error"><?php echo htmlspecialchars($errors['productPrice']) ?></p>
+                    <?php endif; ?>
                 </div>
 
                 <div class="input-container">
@@ -115,13 +123,13 @@ if (!$product) {
                     </select>
                 </div>
 
-                <label for="productImage">Replace Image (optional):</label>
-
-
                 <div class="input-container">
-                    <p>Current Image:</p>
+                    <label for="productImage">Replace Image (optional):</label>
+                    <input type="file" id="productImage" name="productImage" accept=".jpg,.jpeg,.png,.gif" class="white-text <?php echo isset($errors['productImage']) ? 'border-error' : ''; ?>">
+                    <?php if (isset($errors['productImage'])): ?>
+                        <p class="text-error"><?php echo htmlspecialchars($errors['productImage']) ?></p>
+                    <?php endif; ?>
 
-                    <input type="file" id="productImage" name="productImage" accept=".jpg,.jpeg,.png,.gif" class="white-text">
                     <div class="create-product-image-preview-container">
                         <div class="current-image-container">
                             <p>Current Image</p>
@@ -133,6 +141,7 @@ if (!$product) {
                         </div>
                     </div>
                 </div>
+
                 <button type="submit" class="main-btn">Update Product</button>
                 <a href="./viewproducts.php" class="dark-btn">Go Back</a>
             </form>
@@ -141,5 +150,4 @@ if (!$product) {
 </body>
 
 <?php require_once "./inc/templates/footer.php"; ?>
-
 </html>

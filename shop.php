@@ -3,7 +3,7 @@ $pageTitle = "AracdiaWorks";
 $pageDescription = "Explore ArcadiaWorks handcrafted vintage arcade cabinets—authentic retro gaming experiences built with modern precision. Custom designs, premium materials, and timeless nostalgia for collectors and enthusiasts.";
 require_once "./inc/classes/Session.php";
 require_once "./inc/templates/meta.php";
-if(!Session::isLoggedIn()){
+if (!Session::isLoggedIn()) {
     require_once "./inc/templates/header.php";
 } else {
     require_once "./inc/templates/adminHeader.php";
@@ -23,9 +23,9 @@ if (!empty($products)) {
 <body>
     <main>
         <section class="featured-section">
-        <h1 class="featured-title">F<span class="logo-colour-2">eatured</span> A<span class="logo-colour-2">rcade</span> M<span class="logo-colour-2">achine</span></h1>
+            <h1 class="featured-title">F<span class="logo-colour-2">eatured</span> A<span class="logo-colour-2">rcade</span> M<span class="logo-colour-2">achine</span></h1>
             <?php if (isset($featuredProduct)):
-                ?>
+            ?>
                 <article class="featured-product">
                     <div class="featured-left">
                         <h1 class="featured-product-title"><?php echo htmlspecialchars($featuredProduct['productTitle']) ?></h1>
@@ -36,7 +36,16 @@ if (!empty($products)) {
                     <div class="featured-right">
                         <h2 class="logo-colour">Description</h2>
                         <p class="featured-description"><?php echo htmlspecialchars($featuredProduct['productDescription']) ?></p>
-                        <h3 class="logo-colour-2">Condition: <?php echo htmlspecialchars($featuredProduct['productCondition']) ?></h3>
+                        <h3 class="logo-colour">Condition: <?php echo htmlspecialchars($featuredProduct['productCondition']) ?></h3>
+                        <div class="inline-container">
+                            <p><span class="bold logo-colour-2">Dimensions: </span>22.6"D x 68.9"H x 72.5"W</p>
+                        </div>
+                        <div class="inline-container">
+                            <p><span class="bold logo-colour-2">Screen Type: </span> CRT</p>
+                        </div>
+                        <div class="inline-container">
+                            <p><span class="bold logo-colour-2">Screen Size: </span>24"</p>
+                        </div>
                         <div class="inline-container">
                             <a href="" class="main-btn">Add To Cart</a>
                             <p class="featured-price">$<?php echo htmlspecialchars($featuredProduct['productPrice']) ?></p>
