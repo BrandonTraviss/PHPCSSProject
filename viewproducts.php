@@ -41,18 +41,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['delete']) && is_numeric
                 if (!empty($products)) {
                     foreach ($products as $product): ?>
                         <article class="product-view">
-                            <div class="product-view-image-container">
-                                <img src="./<?php echo htmlspecialchars($product['imgLink']) ?>" alt="<?php echo htmlspecialchars($product['productTitle']) ?>">
+                            <div class="product-inner-container">
+                                <div class="center-product-image">
+                                    <div class="product-view-image-container">
+                                        <img src="./<?php echo htmlspecialchars($product['imgLink']) ?>" alt="<?php echo htmlspecialchars($product['productTitle']) ?>">
+                                    </div>
+                                </div>
+
+                                <div class="product-inner-container">
+                                    <p><span class="logo-colour-2">Title: </span><?php echo htmlspecialchars($product['productTitle']) ?></p>
+                                    <p><span class="logo-colour-2">Manufacturer: </span><?php echo htmlspecialchars($product['productManufacturer']) ?></p>
+                                    <p class="view-products-description"><span class="logo-colour-2">Description: </span><?php echo htmlspecialchars($product['productDescription']) ?></p>
+                                    <p><span class="logo-colour-2">Dimensions: </span>
+                                        <?php echo htmlspecialchars($product['productDepth']) ?>"D x
+                                        <?php echo htmlspecialchars($product['productHeight']) ?>"H x
+                                        <?php echo htmlspecialchars($product['productWidth']) ?>"W</p>
+                                    <p><span class="logo-colour-2">Weight: </span><?php echo htmlspecialchars($product["productWeight"]) ?>lbs</p>
+                                    <p><span class="logo-colour-2">Price: </span>$<?php echo number_format($product['productPrice'], 2) ?></p>
+                                    <p><span class="logo-colour-2">Condition: </span><?php echo htmlspecialchars($product['productCondition']) ?></p>
+                                </div>
+
                             </div>
-                            <p>Title: <?php echo htmlspecialchars($product['productTitle']) ?></p>
-                            <p>Description: <?php echo htmlspecialchars($product['productDescription']) ?></p>
-                            <p>Price: $<?php echo number_format($product['productPrice'], 2) ?></p>
-                            <p>Condition: <?php echo htmlspecialchars($product['productCondition']) ?></p>
-                            <a href="editproduct.php?id=<?php echo $product['ID'] ?>">Edit Product</a>
-                            <a href="viewproducts.php?delete=<?php echo $product['ID'] ?>"
-                                onclick="return confirm('Are you sure you want to delete this product?');">
-                                Delete Product
-                            </a>
+                            <div class="product-inner-container-row">
+                                <a class="no-dec logo-colour hover-colour-2 bold" href="editproduct.php?id=<?php echo $product['ID'] ?>">Edit</a>
+                                <a class="no-dec logo-colour hover-colour-2 bold" href="viewproducts.php?delete=<?php echo $product['ID'] ?>"
+                                    onclick="return confirm('Are you sure you want to delete this product?');">
+                                    Delete
+                                </a>
+                            </div>
                         </article>
                 <?php endforeach;
                 } else {

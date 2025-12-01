@@ -1,6 +1,6 @@
 <header>
     <nav>
-        <a href="./index.php" class="logo-nav"><img class="nav-logo" src="./src/img/darkThemeLogo.png" alt="Home"></a>
+        <a href="./index.php" class="logo-nav"><img class="nav-logo" src="./src/img/darkThemeLogo.jpg" alt="Home"></a>
         <menu class="desktop-menu">
             <li><a href="./index.php">Home</a></li>
             <li><a href="./shop.php">Shop</a></li>

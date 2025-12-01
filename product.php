@@ -16,7 +16,7 @@ $crud = new Crud();
 ?>
 
 <body>
-    <main>
+    <main class="product-main">
         <?php if (isset($_GET['ID'])): ?>
             <?php
             $id = intval($_GET['ID']);
@@ -28,6 +28,9 @@ $crud = new Crud();
                         <h1 class="featured-product-title"><?php echo htmlspecialchars($product['productTitle']) ?></h1>
                         <div class="featured-img-container">
                             <img src="./<?php echo htmlspecialchars($product['imgLink']) ?>" alt="">
+                        </div>
+                        <div class="inline-container">
+                            <h2>$<?php echo htmlspecialchars($product['productPrice']) ?></h2>
                         </div>
                     </div>
                     <div class="featured-right">
@@ -52,9 +55,8 @@ $crud = new Crud();
                         </div>
                         <div class="inline-container">
                             <a href="" class="main-btn">Add To Cart</a>
-                            <p class="featured-price">$<?php echo htmlspecialchars($product['productPrice']) ?></p>
+                            <a href="shop.php" class="dark-btn">Back To Shop</a>
                         </div>
-                        <a href="shop.php" class="dark-btn">Back To Shop</a>
                     </div>
                 </article>
             <?php else: ?>

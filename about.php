@@ -31,7 +31,7 @@ if(!Session::isLoggedIn()){
             <details>
                 <summary>Our Products</summary>
                 <p>Our inventory includes vintage originals, refurbished classics, and custom-built arcade cabinets. Each unit is tested for durability and gameplay quality, with optional enhancements like LED lighting, multi-game systems, and personalized artwork.
-                    <a href="./shop.php" class="logo-colour no-dec">Check out our shop</a>
+                    <a href="./shop.php" class="logo-colour no-dec bold hover-colour-2">Check out our shop</a>
                 </p>
             </details>
             <details>
@@ -46,7 +46,7 @@ if(!Session::isLoggedIn()){
             </details>
             <details>
                 <summary>Get in Touch</summary>
-                <p>Have a cabinet to sell? Looking for something specific? Want a custom build? Reach out through our <a href="./contact.php" class="logo-colour no-dec">Contact</a> page.We're always ready to talk arcade and help you find the perfect machine.
+                <p>Have a cabinet to sell? Looking for something specific? Want a custom build? Reach out through our <a href="./contact.php" class="logo-colour no-dec bold hover-colour-2">Contact</a> page.We're always ready to talk arcade and help you find the perfect machine.
                 </p>
             </details>
         </section>
@@ -55,21 +55,21 @@ if(!Session::isLoggedIn()){
             <div class="profiles-container">
                 <article class="about-profile">
                     <div class="about-profile-pic-container">
-                        <img src="./src/img/alexCarter.png" alt="Alex Carter">
+                        <img src="./src/img/jaydenJohnson.jpg" alt="Jayden Johnson">
                     </div>
-                    <h3 class="logo-colour-2">Alex Carter</h3>
+                    <h3 class="logo-colour-2">Jayden Johnson</h3>
                     <p>Founder & CEO</p>
                 </article>
                 <article class="about-profile">
                     <div class="about-profile-pic-container">
-                        <img src="./src/img/jordanLee.png" alt="Jordan Lee">
+                        <img src="./src/img/jordanLee.jpg" alt="Jordan Lee">
                     </div>
                     <h3 class="logo-colour-2">Jordan Lee</h3>
                     <p>Head of Operations</p>
                 </article>
                 <article class="about-profile">
                     <div class="about-profile-pic-container">
-                        <img src="./src/img/suzukiHiroshi.png" alt="Suzuki Hiroshi">
+                        <img src="./src/img/suzukiHiroshi.jpg" alt="Suzuki Hiroshi">
                     </div>
                     <h3 class="logo-colour-2">Suzuki Hiroshi</h3>
                     <p>Refurbishment Lead</p>

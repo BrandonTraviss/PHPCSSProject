@@ -41,16 +41,22 @@ if (!empty($products)) {
                             <p><span class="bold logo-colour-2">Manufacturer: </span>Atari</p>
                         </div>
                         <div class="inline-container">
-                            <p><span class="bold logo-colour-2">Dimensions: </span>22.6"D x 68.9"H x 72.5"W</p>
+                            <p><span class="bold logo-colour-2">Dimensions: </span>
+                            <?php echo htmlspecialchars($featuredProduct['productDepth']) ?>"D x 
+                            <?php echo htmlspecialchars($featuredProduct['productHeight']) ?>"H x
+                            <?php echo htmlspecialchars($featuredProduct['productWidth']) ?>"W</p>
                         </div>
                         <div class="inline-container">
-                            <p><span class="bold logo-colour-2">Screen Type: </span> CRT</p>
+                            <p><span class="bold logo-colour-2">Screen Type: </span>
+                            <?php echo htmlspecialchars($featuredProduct['productScreenType']) ?></p>
                         </div>
                         <div class="inline-container">
-                            <p><span class="bold logo-colour-2">Screen Size: </span>24"</p>
+                            <p><span class="bold logo-colour-2">Screen Size: </span>
+                        <?php echo htmlspecialchars($featuredProduct['productScreenSize']) ?>"</p>
                         </div>
                         <div class="inline-container">
-                            <p><span class="bold logo-colour-2">Weight: </span>68lbs</p>
+                            <p><span class="bold logo-colour-2">Weight: </span>
+                            <?php echo htmlspecialchars($featuredProduct['productWeight']) ?>lbs</p>
                         </div>
                         <div class="inline-container">
                             <a href="" class="main-btn">Add To Cart</a>
