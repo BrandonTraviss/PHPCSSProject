@@ -932,6 +932,9 @@ details p {
 .small-text {
     font-size: .8rem;
 }
+.small-heading{
+    font-size:1.1rem
+}
 
 /* Multi Use Classes */
 .inline-container {
