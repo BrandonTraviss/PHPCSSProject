@@ -38,7 +38,7 @@ if (!empty($products)) {
                         <p class="featured-description"><?php echo htmlspecialchars($featuredProduct['productDescription']) ?></p>
                         <h3 class="logo-colour">Condition: <?php echo htmlspecialchars($featuredProduct['productCondition']) ?></h3>
                         <div class="inline-container">
-                            <p><span class="bold logo-colour-2">Manufacturer: </span>Atari</p>
+                            <p><span class="bold logo-colour-2">Manufacturer: </span><?php echo htmlspecialchars($featuredProduct['productManufacturer']) ?></p>
                         </div>
                         <div class="inline-container">
                             <p><span class="bold logo-colour-2">Dimensions: </span>
