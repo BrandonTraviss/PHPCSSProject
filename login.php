@@ -2,7 +2,7 @@
 $pageTitle = "AracdiaWorks";
 $pageDescription = "Explore ArcadiaWorks handcrafted vintage arcade cabinets—authentic retro gaming experiences built with modern precision. Custom designs, premium materials, and timeless nostalgia for collectors and enthusiasts.";
 require_once "./inc/classes/Session.php";
-require_once "./inc/classes/Crud.php";
+require_once "./inc/classes/crud.php";
 require_once "./inc/templates/meta.php";
 if (!Session::isLoggedIn()) {
     require_once "./inc/templates/header.php";
@@ -10,7 +10,7 @@ if (!Session::isLoggedIn()) {
     require_once "./inc/templates/adminHeader.php";
 }
 if (Session::isLoggedIn()) {
-    header('Location:viewproducts.php');
+    header('Location:viewProducts.php');
     exit;
 }
 $error = '';
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($user) {
         Session::set("user_id", $user['ID']);
         Session::set('username', $user['username']);
-        header('Location:viewproducts.php');
+        header('Location:viewProducts.php');
         exit;
     } else {
         $error = "Invalid Username or Password";

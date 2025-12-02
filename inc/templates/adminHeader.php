@@ -6,14 +6,14 @@
         </div>
         <menu class="desktop-menu">
             <li><a href="./shop.php">Shop</a></li>
-            <li><a href="./createproduct.php">Create Product</a></li>
-            <li><a href="./viewproducts.php">View Products</a></li>
+            <li><a href="./createProduct.php">Create Product</a></li>
+            <li><a href="./viewProducts.php">View Products</a></li>
             <li><a href="./logout.php">Logout</a></li>
         </menu>
         <menu class="mobile-menu hidden">
             <li><a href="./shop.php">Shop</a></li>
-            <li><a href="./createproduct.php">Create Product</a></li>
-            <li><a href="./viewproducts.php">View Products</a></li>
+            <li><a href="./createProduct.php">Create Product</a></li>
+            <li><a href="./viewProducts.php">View Products</a></li>
             <li><a href="./logout.php">Logout</a></li>
         </menu>
         <div class="menu-icon-container">

@@ -8,7 +8,7 @@ if (!Session::isLoggedIn()) {
 } else {
     require_once "./inc/templates/adminHeader.php";
 }
-require_once './inc/classes/Crud.php';
+require_once './inc/classes/crud.php';
 $crud = new Crud();
 $products = $crud->getAllProducts();
 

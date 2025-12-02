@@ -1,6 +1,6 @@
 <?php
-require_once "./inc/classes/Database.php";
-require_once "./inc/classes/Validation.php";
+require_once "./inc/classes/database.php";
+require_once "./inc/classes/validation.php";
 
 class Crud extends Database
 {

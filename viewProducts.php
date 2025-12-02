@@ -1,9 +1,9 @@
 <?php
 $pageTitle = "ArcadiaWorks | Create Product";
 $pageDescription = "Add products to the database this is for admins only.";
-require_once './inc/classes/Crud.php';
+require_once './inc/classes/crud.php';
 require_once './inc/classes/FileHandler.php';
-require_once './inc/classes/Validation.php';
+require_once './inc/classes/validation.php';
 require_once "./inc/classes/Session.php";
 require_once './inc/templates/meta.php';
 if (!Session::isLoggedIn()) {
@@ -19,7 +19,7 @@ $crud = new Crud();
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     $deleteId = (int)$_GET['delete'];
     if ($crud->deleteProduct($deleteId)) {
-        header("Location: viewproducts.php?deleted=1");
+        header("Location: viewProducts.php?deleted=1");
         exit;
     } else {
         echo "<p class='error'>Failed to delete product.</p>";
@@ -63,8 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['delete']) && is_numeric
 
                             </div>
                             <div class="product-inner-container-row">
-                                <a class="no-dec logo-colour hover-colour-2 bold" href="editproduct.php?id=<?php echo $product['ID'] ?>">Edit</a>
-                                <a class="no-dec logo-colour hover-colour-2 bold" href="viewproducts.php?delete=<?php echo $product['ID'] ?>"
+                                <a class="no-dec logo-colour hover-colour-2 bold" href="editProduct.php?id=<?php echo $product['ID'] ?>">Edit</a>
+                                <a class="no-dec logo-colour hover-colour-2 bold" href="viewProducts.php?delete=<?php echo $product['ID'] ?>"
                                     onclick="return confirm('Are you sure you want to delete this product?');">
                                     Delete
                                 </a>

@@ -1,7 +1,7 @@
 <?php
-require_once './inc/classes/Crud.php';
+require_once './inc/classes/crud.php';
 require_once './inc/classes/FileHandler.php';
-require_once './inc/classes/Validation.php';
+require_once './inc/classes/validation.php';
 
 $pageTitle = "ArcadiaWorks | Create Product";
 $pageDescription = "Add products to the database — admin access only.";
