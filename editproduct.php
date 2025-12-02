@@ -10,7 +10,6 @@ $fileHandler = new FileHandler();
 $validation = new Validation();
 
 $successMessage = '';
-$errorMessage = '';
 $errors = [];
 $old = [];
 $productId = $_GET['id'] ?? null;
@@ -20,49 +19,51 @@ $product = $productId ? $crud->getProduct($productId) : null;
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $product) {
     $fileData = $_FILES['productImage'];
     $imagePath = $product['imgLink'];
-
-    // Only validate if a file was uploaded
+    $fileExt = null;
     if (!empty($fileData['name'])) {
         $fileExt = $validation->validateImage($fileData);
-
         if ($fileExt === false) {
             $errors['productImage'] = "Invalid image format. Please upload a JPG, PNG, or GIF. Size must also be under 2mb";
-        } else {
+        }
+    }
+
+    $formData = [
+        "imgLink"            => $imagePath, 
+        "productTitle"       => $_POST["productTitle"],
+        "productDescription" => $_POST["productDescription"],
+        "productPrice"       => $_POST["productPrice"],
+        "productCondition"   => $_POST["productCondition"],
+        "productWidth"       => $_POST["productWidth"],
+        "productHeight"      => $_POST["productHeight"],
+        "productDepth"       => $_POST["productDepth"],
+        "productManufacturer"=> $_POST["productManufacturer"],
+        "productScreenSize"  => $_POST["productScreenSize"],
+        "productScreenType"  => $_POST["productScreenType"],
+        "productWeight"      => $_POST["productWeight"]
+    ];
+    $old = $formData;
+
+    $errors = array_merge($errors, $validation->validateProductForm($old));
+
+    if (empty($errors)) {
+        if (!empty($fileData['name']) && $fileExt !== false) {
             $newPath = $fileHandler->saveImage($fileData, $fileExt);
             if ($newPath !== false) {
-                $imagePath = $newPath;
+                $formData['imgLink'] = $newPath;
             } else {
                 $errors['productImage'] = "Failed to save image.";
             }
         }
-    }
 
-    if (empty($errors)) {
-        $formData = [
-            "imgLink"            => $imagePath,
-            "productTitle"       => $_POST["productTitle"],
-            "productDescription" => $_POST["productDescription"],
-            "productPrice"       => $_POST["productPrice"],
-            "productCondition"   => $_POST["productCondition"],
-            "productWidth"       => $_POST["productWidth"],
-            "productHeight"      => $_POST["productHeight"],
-            "productDepth"       => $_POST["productDepth"],
-            "productManufacturer" => $_POST["productManufacturer"],
-            "productScreenSize"  => $_POST["productScreenSize"],
-            "productScreenType"  => $_POST["productScreenType"],
-            "productWeight"      => $_POST["productWeight"]
-        ];
-        $old = $formData;
-
-        $result = $crud->updateProduct($productId, $formData);
-
-        if ($result === true) {
-            $successMessage = "Product updated successfully!";
-            $product = $crud->getProduct($productId);
-            $old = [];
+        if (empty($errors)) {
+            $result = $crud->updateProduct($productId, $formData);
+            if ($result === true) {
+                $successMessage = "Product updated successfully!";
+                $product = $crud->getProduct($productId);
+                $old = [];
+            } 
         }
-        $errorMessage = "Please fix the errors below.";
-    }
+    } 
 }
 
 if (!$product) {
@@ -92,7 +93,6 @@ if (!$product) {
 
         <?php if ($product): ?>
             <form action="" method="POST" enctype="multipart/form-data" class="create-product-form">
-
                 <div class="input-container">
                     <label for="productTitle">Product Title:</label>
                     <input type="text" id="productTitle" name="productTitle"
