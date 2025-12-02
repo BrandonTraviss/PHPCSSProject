@@ -30,7 +30,7 @@ if (!empty($products)) {
                     <div class="featured-left">
                         <h1 class="featured-product-title"><?php echo htmlspecialchars($featuredProduct['productTitle']) ?></h1>
                         <div class="featured-img-container">
-                            <img src="./<?php echo htmlspecialchars($featuredProduct['imgLink']) ?>" alt="">
+                            <img src="./<?php echo htmlspecialchars($featuredProduct['imgLink']) ?>" alt="<?php echo htmlspecialchars($featuredProduct['productTitle']);?>">
                         </div>
                     </div>
                     <div class="featured-right">

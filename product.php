@@ -27,7 +27,7 @@ $crud = new Crud();
                     <div class="featured-left">
                         <h1 class="featured-product-title"><?php echo htmlspecialchars($product['productTitle']) ?></h1>
                         <div class="featured-img-container">
-                            <img src="./<?php echo htmlspecialchars($product['imgLink']) ?>" alt="">
+                            <img src="./<?php echo htmlspecialchars($product['imgLink']) ?>" alt="<?php echo htmlspecialchars($product['productTitle']);?>">
                         </div>
                         <div class="inline-container">
                             <h2>$<?php echo htmlspecialchars($product['productPrice']) ?></h2>
