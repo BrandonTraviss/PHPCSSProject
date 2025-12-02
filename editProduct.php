@@ -28,18 +28,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $product) {
     }
 
     $formData = [
-        "imgLink"            => $imagePath, 
-        "productTitle"       => $_POST["productTitle"],
+        "imgLink" => $imagePath,
+        "productTitle" => $_POST["productTitle"],
         "productDescription" => $_POST["productDescription"],
-        "productPrice"       => $_POST["productPrice"],
-        "productCondition"   => $_POST["productCondition"],
-        "productWidth"       => $_POST["productWidth"],
-        "productHeight"      => $_POST["productHeight"],
-        "productDepth"       => $_POST["productDepth"],
-        "productManufacturer"=> $_POST["productManufacturer"],
-        "productScreenSize"  => $_POST["productScreenSize"],
-        "productScreenType"  => $_POST["productScreenType"],
-        "productWeight"      => $_POST["productWeight"]
+        "productPrice" => $_POST["productPrice"],
+        "productCondition" => $_POST["productCondition"],
+        "productWidth" => $_POST["productWidth"],
+        "productHeight" => $_POST["productHeight"],
+        "productDepth" => $_POST["productDepth"],
+        "productManufacturer" => $_POST["productManufacturer"],
+        "productScreenSize" => $_POST["productScreenSize"],
+        "productScreenType" => $_POST["productScreenType"],
+        "productWeight" => $_POST["productWeight"]
     ];
     $old = $formData;
 
@@ -61,9 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $product) {
                 $successMessage = "Product updated successfully!";
                 $product = $crud->getProduct($productId);
                 $old = [];
-            } 
+            }
         }
-    } 
+    }
 }
 
 if (!$product) {
@@ -72,18 +72,18 @@ if (!$product) {
 ?>
 <?php require_once "./inc/classes/Session.php"; ?>
 <?php include_once "./inc/templates/meta.php"; ?>
-<?php if (!Session::isLoggedIn()) {
-    require_once "./inc/templates/header.php";
-} else {
-    require_once "./inc/templates/adminHeader.php";
-} ?>
-<?php if (!Session::isLoggedIn()) {
-    header("Location:login.php");
-    exit;
-}
-?>
 
 <body>
+    <?php if (!Session::isLoggedIn()) {
+        require_once "./inc/templates/header.php";
+    } else {
+        require_once "./inc/templates/adminHeader.php";
+    } ?>
+    <?php if (!Session::isLoggedIn()) {
+        header("Location:login.php");
+        exit;
+    }
+    ?>
     <main class="create-product-main">
         <h2 style="text-align:center;">Edit Product</h2>
 
@@ -92,7 +92,7 @@ if (!$product) {
         <?php endif; ?>
 
         <?php if ($product): ?>
-            <form action="" method="POST" enctype="multipart/form-data" class="create-product-form">
+            <form method="POST" enctype="multipart/form-data" class="create-product-form">
                 <div class="input-container">
                     <label for="productTitle">Product Title:</label>
                     <input type="text" id="productTitle" name="productTitle"
@@ -107,7 +107,8 @@ if (!$product) {
                     <label for="productManufacturer">Manufacturer:</label>
                     <input type="text" id="productManufacturer" name="productManufacturer"
                         class="<?php echo isset($errors['productManufacturer']) ? 'border-error' : ''; ?>"
-                        value="<?php echo htmlspecialchars($old['productManufacturer'] ?? $product['productManufacturer']) ?>" required>
+                        value="<?php echo htmlspecialchars($old['productManufacturer'] ?? $product['productManufacturer']) ?>"
+                        required>
                     <?php if (isset($errors['productManufacturer'])): ?>
                         <p class="text-error"><?php echo htmlspecialchars($errors['productManufacturer']) ?></p>
                     <?php endif; ?>
@@ -116,7 +117,8 @@ if (!$product) {
                 <div class="input-container">
                     <label for="productDescription">Description:</label>
                     <textarea class="<?php echo isset($errors['productDescription']) ? 'border-error' : ''; ?>"
-                        id="productDescription" name="productDescription" rows="4"><?php echo htmlspecialchars($old['productDescription'] ?? $product['productDescription']) ?></textarea>
+                        id="productDescription" name="productDescription"
+                        rows="4"><?php echo htmlspecialchars($old['productDescription'] ?? $product['productDescription']) ?></textarea>
                     <?php if (isset($errors['productDescription'])): ?>
                         <p class="text-error"><?php echo htmlspecialchars($errors['productDescription']) ?></p>
                     <?php endif; ?>
@@ -126,7 +128,8 @@ if (!$product) {
                     <div class="input-container-sm">
                         <label for="productDepth">Depth</label>
                         <input type="number" id="productDepth" name="productDepth" step="0.01"
-                            value="<?php echo htmlspecialchars($old['productDepth'] ?? $product['productDepth']) ?>" required>
+                            value="<?php echo htmlspecialchars($old['productDepth'] ?? $product['productDepth']) ?>"
+                            required>
                         <?php if (isset($errors['productDepth'])): ?>
                             <p class="text-error"><?php echo htmlspecialchars($errors['productDepth']) ?></p>
                         <?php endif; ?>
@@ -134,7 +137,8 @@ if (!$product) {
                     <div class="input-container-sm">
                         <label for="productHeight">Height</label>
                         <input type="number" id="productHeight" name="productHeight" step="0.01"
-                            value="<?php echo htmlspecialchars($old['productHeight'] ?? $product['productHeight']) ?>" required>
+                            value="<?php echo htmlspecialchars($old['productHeight'] ?? $product['productHeight']) ?>"
+                            required>
                         <?php if (isset($errors['productHeight'])): ?>
                             <p class="text-error"><?php echo htmlspecialchars($errors['productHeight']) ?></p>
                         <?php endif; ?>
@@ -142,7 +146,8 @@ if (!$product) {
                     <div class="input-container-sm">
                         <label for="productWidth">Width</label>
                         <input type="number" id="productWidth" name="productWidth" step="0.01"
-                            value="<?php echo htmlspecialchars($old['productWidth'] ?? $product['productWidth']) ?>" required>
+                            value="<?php echo htmlspecialchars($old['productWidth'] ?? $product['productWidth']) ?>"
+                            required>
                         <?php if (isset($errors['productWidth'])): ?>
                             <p class="text-error"><?php echo htmlspecialchars($errors['productWidth']) ?></p>
                         <?php endif; ?>
@@ -185,7 +190,8 @@ if (!$product) {
                 <div class="input-container">
                     <label for="productScreenSize">Size (inches):</label>
                     <input type="number" id="productScreenSize" name="productScreenSize" step="1"
-                        value="<?php echo htmlspecialchars($old['productScreenSize'] ?? $product['productScreenSize']) ?>" required>
+                        value="<?php echo htmlspecialchars($old['productScreenSize'] ?? $product['productScreenSize']) ?>"
+                        required>
                     <?php if (isset($errors['productScreenSize'])): ?>
                         <p class="text-error"><?php echo htmlspecialchars($errors['productScreenSize']) ?></p>
                     <?php endif; ?>
@@ -216,7 +222,7 @@ if (!$product) {
                         </div>
                         <div id="imagePreviewContainer" class="image-preview-container">
                             <p>New Image</p>
-                            <img id="imagePreview" src="#" alt="Image Preview" />
+                            <img id="imagePreview" src="#" alt="Image Preview" >
                         </div>
                     </div>
                 </div>
@@ -226,8 +232,4 @@ if (!$product) {
             </form>
         <?php endif; ?>
     </main>
-</body>
-
-<?php require_once "./inc/templates/footer.php"; ?>
-
-</html>
+    <?php require_once "./inc/templates/footer.php"; ?>

@@ -4,52 +4,52 @@ $pageDescription = "Explore ArcadiaWorks handcrafted vintage arcade cabinets—a
 
 require_once "./inc/classes/Session.php";
 require_once "./inc/templates/meta.php";
-
-if (!Session::isLoggedIn()) {
-    require_once "./inc/templates/header.php";
-} else {
-    require_once "./inc/templates/adminHeader.php";
-}
-
-require_once './inc/classes/crud.php';
-require_once './inc/classes/validation.php';
-
-$crud = new Crud();
-$validation = new Validation();
-
-$successMessage = null;
-$formErrors = [];
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $formData = [
-        "username" => $_POST["username"],
-        "email" => $_POST["email"],
-        "password" => $_POST["password"],
-        "confirmPassword" => $_POST["confirmPassword"]
-    ];
-
-    $formErrors = $validation->validateRegisterForm($formData);
-    $isError = false;
-
-    foreach ($formErrors as $error) {
-        if ($error !== false) {
-            $isError = true;
-        }
-    }
-
-    if (!$isError) {
-        $crud->registerUser($formData);
-        $successMessage = "Account Successfully Created";
-        $_POST = []; // clear form values
-    }
-}
 ?>
 
 <body class="register-body">
-    <main>
-        <!-- ✅ Success message -->
+    <?php
+    if (!Session::isLoggedIn()) {
+        require_once "./inc/templates/header.php";
+    } else {
+        require_once "./inc/templates/adminHeader.php";
+    }
 
-        <form action="" class="register-form" method="POST">
+    require_once './inc/classes/crud.php';
+    require_once './inc/classes/validation.php';
+
+    $crud = new Crud();
+    $validation = new Validation();
+
+    $successMessage = null;
+    $formErrors = [];
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $formData = [
+            "username" => $_POST["username"],
+            "email" => $_POST["email"],
+            "password" => $_POST["password"],
+            "confirmPassword" => $_POST["confirmPassword"]
+        ];
+
+        $formErrors = $validation->validateRegisterForm($formData);
+        $isError = false;
+
+        foreach ($formErrors as $error) {
+            if ($error !== false) {
+                $isError = true;
+            }
+        }
+
+        if (!$isError) {
+            $crud->registerUser($formData);
+            $successMessage = "Account Successfully Created";
+            $_POST = [];
+        }
+    }
+    ?>
+
+    <main>
+        <form class="register-form" method="POST">
             <h2 class="mb-2">Register</h2>
             <?php if (!empty($successMessage)): ?>
                 <p class="message-success"><?php echo htmlspecialchars($successMessage); ?></p>
@@ -102,5 +102,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p>Have an account? <a class="logo-colour no-dec" href="./login.php">Login</a></p>
         </form>
     </main>
-</body>
-<?php require_once "./inc/templates/footer.php" ?>
+    <?php require_once "./inc/templates/footer.php" ?>

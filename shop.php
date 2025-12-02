@@ -3,6 +3,9 @@ $pageTitle = "AracdiaWorks";
 $pageDescription = "Explore ArcadiaWorks handcrafted vintage arcade cabinets—authentic retro gaming experiences built with modern precision. Custom designs, premium materials, and timeless nostalgia for collectors and enthusiasts.";
 require_once "./inc/classes/Session.php";
 require_once "./inc/templates/meta.php";
+?>
+<body>
+<?php
 if (!Session::isLoggedIn()) {
     require_once "./inc/templates/header.php";
 } else {
@@ -19,8 +22,6 @@ if (!empty($products)) {
     $products = array_values($products);
 }
 ?>
-
-<body>
     <main>
         <section class="featured-section">
             <h1 class="featured-title">F<span class="logo-colour-2">eatured</span> A<span class="logo-colour-2">rcade</span> M<span class="logo-colour-2">achine</span></h1>
@@ -28,7 +29,7 @@ if (!empty($products)) {
             ?>
                 <article class="featured-product">
                     <div class="featured-left">
-                        <h1 class="featured-product-title"><?php echo htmlspecialchars($featuredProduct['productTitle']) ?></h1>
+                        <h2 class="featured-product-title"><?php echo htmlspecialchars($featuredProduct['productTitle']) ?></h2>
                         <div class="featured-img-container">
                             <img src="./<?php echo htmlspecialchars($featuredProduct['imgLink']) ?>" alt="<?php echo htmlspecialchars($featuredProduct['productTitle']);?>">
                         </div>
@@ -95,5 +96,4 @@ if (!empty($products)) {
             </div>
         </section>
     </main>
-</body>
 <?php require_once "./inc/templates/footer.php" ?>

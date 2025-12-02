@@ -4,18 +4,20 @@ $pageDescription = "Explore ArcadiaWorks handcrafted vintage arcade cabinets—a
 require_once "./inc/classes/Session.php";
 require_once "./inc/templates/meta.php";
 require_once './inc/classes/crud.php';
-
-if (!Session::isLoggedIn()) {
-    require_once "./inc/templates/header.php";
-} else {
-    require_once "./inc/templates/adminHeader.php";
-}
-
-$crud = new Crud();
-
 ?>
 
 <body>
+    <?php
+    if (!Session::isLoggedIn()) {
+        require_once "./inc/templates/header.php";
+    } else {
+        require_once "./inc/templates/adminHeader.php";
+    }
+
+    $crud = new Crud();
+
+    ?>
+
     <main class="product-main">
         <?php if (isset($_GET['ID'])): ?>
             <?php
@@ -27,7 +29,8 @@ $crud = new Crud();
                     <div class="featured-left">
                         <h1 class="featured-product-title"><?php echo htmlspecialchars($product['productTitle']) ?></h1>
                         <div class="featured-img-container">
-                            <img src="./<?php echo htmlspecialchars($product['imgLink']) ?>" alt="<?php echo htmlspecialchars($product['productTitle']);?>">
+                            <img src="./<?php echo htmlspecialchars($product['imgLink']) ?>"
+                                alt="<?php echo htmlspecialchars($product['productTitle']); ?>">
                         </div>
                         <div class="inline-container">
                             <h2>$<?php echo htmlspecialchars($product['productPrice']) ?></h2>
@@ -75,5 +78,4 @@ $crud = new Crud();
             <p>No product ID specified.</p>
         <?php endif; ?>
     </main>
-</body>
 <?php require_once "./inc/templates/footer.php" ?>

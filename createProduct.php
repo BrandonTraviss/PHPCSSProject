@@ -58,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <?php require_once "./inc/classes/Session.php"; ?>
 <?php include_once "./inc/templates/meta.php"; ?>
+<body>
 <?php if (!Session::isLoggedIn()) {
     require_once "./inc/templates/header.php";
 } else {
@@ -69,14 +70,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<body>
+
     <main class="create-product-main">
         <h2>Add a New Product</h2>
         <?php if ($successMessage): ?>
             <p class="logo-colour"><?php echo $successMessage ?></p>
         <?php endif; ?>
 
-        <form action="" method="POST" enctype="multipart/form-data" class="create-product-form">
+        <form method="POST" enctype="multipart/form-data" class="create-product-form">
 
             <div class="input-container">
                 <label for="productTitle">Product Title:</label>
@@ -194,8 +195,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button type="submit" class="main-btn">Create Product</button>
         </form>
     </main>
-</body>
-
 <?php require_once "./inc/templates/footer.php"; ?>
 
-</html>

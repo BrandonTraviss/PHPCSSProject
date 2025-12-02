@@ -2,21 +2,25 @@
 $pageTitle = "ArcadiaWorks";
 $pageDescription = "Welcome to the ArcadiaWorks your one stop shop for arcade cabs";
 require_once "./inc/classes/Session.php";
-require_once "./inc/templates/meta.php";
-if (!Session::isLoggedIn()) {
-    require_once "./inc/templates/header.php";
-} else {
-    require_once "./inc/templates/adminHeader.php";
-}
-?>
+require_once "./inc/templates/meta.php"; ?>
 
 <body class="index-body">
+    <?php
+    if (!Session::isLoggedIn()) {
+        require_once "./inc/templates/header.php";
+    } else {
+        require_once "./inc/templates/adminHeader.php";
+    }
+    ?>
+
+
     <main class="index-main">
 
         <section class="index-hero">
             <article class="hero-card fade-in-up">
-                <h1>REVIVE THE GOLDEN AGE OF GAMING</h1>
-                <p>Rediscover the thrill of classic arcade gaming. Our handcrafted cabinets combine vintage design with modern durability. Step into nostalgia and play like it's 1985.</p>
+                <h2>REVIVE THE GOLDEN AGE OF GAMING</h2>
+                <p>Rediscover the thrill of classic arcade gaming. Our handcrafted cabinets combine vintage design with
+                    modern durability. Step into nostalgia and play like it's 1985.</p>
                 <a href="./shop.php" class="main-btn">OUR SHOP</a>
             </article>
         </section>
@@ -37,7 +41,8 @@ if (!Session::isLoggedIn()) {
                 <article class="value-item">
                     <img src="./src/img/trusted.svg" alt="Modern Durability Icon">
                     <h3>Modern Durability</h3>
-                    <p>Built to last, our cabinets offer the perfect fusion of vintage charm and cutting-edge quality.</p>
+                    <p>Built to last, our cabinets offer the perfect fusion of vintage charm and cutting-edge quality.
+                    </p>
                 </article>
             </div>
         </section>
@@ -48,7 +53,8 @@ if (!Session::isLoggedIn()) {
 
                 <article class="testimonial">
                     <blockquote>
-                        "Reliving the classics has become my stress release. It's like I have my own personal slice of the '80s here at home."
+                        "Reliving the classics has become my stress release. It's like I have my own personal slice of
+                        the '80s here at home."
                     </blockquote>
                     <p class="name-location">
                         <span class="name">Angela Brooks</span>, <span class="location">Barrie, ON</span>
@@ -67,7 +73,8 @@ if (!Session::isLoggedIn()) {
 
                 <article class="testimonial">
                     <blockquote>
-                        "From the joystick feel to the CRT glow, it's like the arcade never left. ArcadiaWorks brought it all back."
+                        "From the joystick feel to the CRT glow, it's like the arcade never left. ArcadiaWorks brought
+                        it all back."
                     </blockquote>
                     <p class="name-location">
                         <span class="name">Brian Baker</span>, <span class="location">Midland, ON</span>
@@ -89,7 +96,6 @@ if (!Session::isLoggedIn()) {
         </section>
 
     </main>
-</body>
-<?php
-require_once "./inc/templates/footer.php";
-?>
+    <?php
+    require_once "./inc/templates/footer.php";
+    ?>

@@ -4,33 +4,35 @@ $pageDescription = "Explore ArcadiaWorks handcrafted vintage arcade cabinets—a
 require_once "./inc/classes/Session.php";
 require_once "./inc/classes/crud.php";
 require_once "./inc/templates/meta.php";
-if (!Session::isLoggedIn()) {
-    require_once "./inc/templates/header.php";
-} else {
-    require_once "./inc/templates/adminHeader.php";
-}
-if (Session::isLoggedIn()) {
-    header('Location:viewProducts.php');
-    exit;
-}
-$error = '';
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $crud = new Crud;
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $user = $crud->login($username, $password);
-    if ($user) {
-        Session::set("user_id", $user['ID']);
-        Session::set('username', $user['username']);
-        header('Location:viewProducts.php');
-        exit;
-    } else {
-        $error = "Invalid Username or Password";
-    }
-}
 ?>
 
 <body class="login-body">
+    <?php
+    if (!Session::isLoggedIn()) {
+        require_once "./inc/templates/header.php";
+    } else {
+        require_once "./inc/templates/adminHeader.php";
+    }
+    if (Session::isLoggedIn()) {
+        header('Location:viewProducts.php');
+        exit;
+    }
+    $error = '';
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $crud = new Crud;
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $user = $crud->login($username, $password);
+        if ($user) {
+            Session::set("user_id", $user['ID']);
+            Session::set('username', $user['username']);
+            header('Location:viewProducts.php');
+            exit;
+        } else {
+            $error = "Invalid Username or Password";
+        }
+    }
+    ?>
     <main class="login-main">
         <div>
             <form action="login.php" class="login-form" method="POST">
@@ -54,5 +56,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </form>
         </div>
     </main>
-</body>
-<?php require_once "./inc/templates/footer.php" ?>
+    <?php require_once "./inc/templates/footer.php" ?>
