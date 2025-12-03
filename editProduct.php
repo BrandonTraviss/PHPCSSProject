@@ -228,7 +228,7 @@ if (!$product) {
                 </div>
 
                 <button type="submit" class="main-btn">Update Product</button>
-                <a href="./viewproducts.php" class="dark-btn">Go Back</a>
+                <a href="./viewProducts.php" class="dark-btn">Go Back</a>
             </form>
         <?php endif; ?>
     </main>
